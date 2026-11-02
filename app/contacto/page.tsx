@@ -24,6 +24,7 @@ export default function ContactoPage() {
             <p>Respondemos lo antes posible. Para una atención más rápida, llámanos directamente.</p>
             <ul className="info-list">
               <li><a href={SITE.phoneHref}><span className="ic"><Icon name="phone" /></span><span><small>Teléfono</small><strong>{SITE.phone}</strong></span></a></li>
+              <li><a href={SITE.phone2Href}><span className="ic"><Icon name="phone" /></span><span><small>Teléfono 2</small><strong>{SITE.phone2}</strong></span></a></li>
               <li><a href={`mailto:${SITE.email}`}><span className="ic"><Icon name="mail" /></span><span><small>Email</small><strong>{SITE.email}</strong></span></a></li>
               <li><div><span className="ic"><Icon name="globe" /></span><span><small>Sitio web</small><strong>{SITE.website}</strong></span></div></li>
               <li><div><span className="ic"><Icon name="pin" /></span><span><small>Servicio</small><strong>A domicilio — vamos a ti</strong></span></div></li>

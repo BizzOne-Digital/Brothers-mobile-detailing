@@ -28,6 +28,7 @@ export default function Footer() {
             <h4>Contacto</h4>
             <ul>
               <li><a href={SITE.phoneHref}><Icon name="phone" /> {SITE.phone}</a></li>
+              <li><a href={SITE.phone2Href}><Icon name="phone" /> {SITE.phone2}</a></li>
               <li><a href={`mailto:${SITE.email}`}><Icon name="mail" /> {SITE.email}</a></li>
               <li><span><Icon name="globe" /> {SITE.website}</span></li>
               <li><span><Icon name="pin" /> Servicio a domicilio</span></li>

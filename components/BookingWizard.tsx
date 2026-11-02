@@ -189,7 +189,8 @@ export default function BookingWizard() {
             <h2>¡Solicitud recibida!</h2>
             <p style={{ color: "var(--gray-500)", maxWidth: 480, margin: "0 auto 26px" }}>
               Gracias por elegir {SITE.name}. Te contactaremos pronto para confirmar tu cita. Si es urgente, llámanos al{" "}
-              <a href={SITE.phoneHref} className="text-red" style={{ fontWeight: 700 }}>{SITE.phone}</a>.
+              <a href={SITE.phoneHref} className="text-red" style={{ fontWeight: 700 }}>{SITE.phone}</a> o al{" "}
+              <a href={SITE.phone2Href} className="text-red" style={{ fontWeight: 700 }}>{SITE.phone2}</a>.
             </p>
             <Link href="/" className="btn btn--dark">Volver al Inicio</Link>
           </div>

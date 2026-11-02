@@ -69,6 +69,7 @@ export default function Navbar() {
         <div className="drawer__bottom">
           <Link href="/reservar" className="btn btn--primary btn--block" onClick={() => setOpen(false)}><Icon name="calendar" /> Agenda tu Cita</Link>
           <a href={SITE.phoneHref} className="btn btn--outline btn--block"><Icon name="phone" /> {SITE.phone}</a>
+          <a href={SITE.phone2Href} className="btn btn--outline btn--block"><Icon name="phone" /> {SITE.phone2}</a>
           <Socials />
         </div>
       </div>

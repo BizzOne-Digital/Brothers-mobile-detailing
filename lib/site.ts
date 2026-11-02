@@ -7,6 +7,8 @@ export const SITE = {
   name: "Brothers Mobile Detailing",
   phone: "702-722-7601",
   phoneHref: "tel:+17027227601",
+  phone2: "702-722-8392",
+  phone2Href: "tel:+17027228392",
   email: "ramonmoises12@gmail.com",
   website: "Brothersmobile.com",
   instagram: "https://www.instagram.com/", // TODO: replace with real profile URL

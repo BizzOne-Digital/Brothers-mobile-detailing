@@ -176,6 +176,7 @@ export default function HomePage() {
             <p>Llámanos o envíanos un mensaje y te respondemos lo antes posible.</p>
             <ul className="info-list">
               <li><a href={SITE.phoneHref}><span className="ic"><Icon name="phone" /></span><span><small>Teléfono</small><strong>{SITE.phone}</strong></span></a></li>
+              <li><a href={SITE.phone2Href}><span className="ic"><Icon name="phone" /></span><span><small>Teléfono 2</small><strong>{SITE.phone2}</strong></span></a></li>
               <li><a href={`mailto:${SITE.email}`}><span className="ic"><Icon name="mail" /></span><span><small>Email</small><strong>{SITE.email}</strong></span></a></li>
             </ul>
           </div>
