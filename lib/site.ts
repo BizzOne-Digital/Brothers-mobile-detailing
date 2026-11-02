@@ -13,7 +13,7 @@ export const SITE = {
   website: "Brothersmobile.com",
   instagram: "https://www.instagram.com/", // TODO: replace with real profile URL
   facebook: "https://www.facebook.com/", // TODO: replace with real page URL
-  startingPrice: 79,
+  startingPrice: 150,
   offerAmount: 50,
   year: 2026,
 };
@@ -50,23 +50,29 @@ export const img = (key: ImgKey, w = 1200) =>
 
 export type Service = {
   id: string; name: string; short: string; price: number | null;
+  regular?: number;   // original price, shown crossed out next to `price`
+  veteran?: boolean;  // eligible for the military veteran discount
   icon: IconName; img: ImgKey; home?: boolean; features: string[];
 };
 
+/** Military veteran discount (percent) — applies to services marked `veteran: true` */
+export const VETERAN_DISCOUNT = 15;
+export const veteranPrice = (price: number) => Math.round(price * (100 - VETERAN_DISCOUNT)) / 100;
+
 // `home: true` shows the card on the homepage. price: null = "Cotizar"
 export const SERVICES: Service[] = [
-  { id: "limpieza", name: "Limpieza de Carros", short: "Interior y exterior impecable.", price: 79, icon: "seat", img: "interior", home: true,
+  { id: "limpieza", name: "Limpieza de Carros", short: "Interior y exterior impecable.", price: 150, veteran: true, icon: "seat", img: "interior", home: true,
     features: ["Lavado exterior a mano", "Aspirado completo", "Limpieza de tablero y paneles", "Vidrios sin manchas"] },
-  { id: "profunda", name: "Limpieza Profunda", short: "Elimina suciedad, manchas y olores.", price: 79, icon: "drops", img: "handWash", home: true,
+  { id: "profunda", name: "Limpieza Profunda", short: "Elimina suciedad, manchas y olores.", price: null, icon: "drops", img: "handWash", home: true,
     features: ["Shampoo de alfombras y asientos", "Eliminación de manchas", "Tratamiento de olores", "Detalle de rincones y rejillas"] },
-  { id: "pintura", name: "Restauración de Pintura", short: "Recupera el brillo y la apariencia original.", price: 79, icon: "sparkle", img: "polish", home: true,
+  { id: "pintura", name: "Restauración de Pintura", short: "Recupera el brillo y la apariencia original.", price: null, icon: "sparkle", img: "polish", home: true,
     features: ["Descontaminación de pintura", "Corrección de rayones leves", "Pulido a máquina", "Sellado y protección"] },
   { id: "exterior", name: "Lavado Exterior", short: "Lavado a mano con espuma y secado sin rayas.", price: null, icon: "car", img: "wheelFoam",
     features: ["Prelavado con espuma", "Lavado a mano, método de dos cubetas", "Secado con microfibra", "Llantas y rines"] },
   { id: "interior", name: "Detallado Interior", short: "Cabina limpia, fresca y protegida.", price: null, icon: "seat", img: "interior",
     features: ["Aspirado profundo", "Limpieza de plásticos y vinil", "Acondicionador de piel", "Vidrios interiores"] },
-  { id: "completo", name: "Detailing Completo", short: "Interior y exterior al máximo nivel.", price: 79, icon: "layers", img: "glossBlack",
-    features: ["Todo el lavado exterior", "Todo el detallado interior", "Protección de pintura", "Acabado de llantas"] },
+  { id: "completo", name: "Detailing Completo con Shampoo", short: "Interior y exterior al máximo nivel, con shampoo.", price: 200, regular: 280, icon: "layers", img: "glossBlack",
+    features: ["Todo el lavado exterior", "Todo el detallado interior", "Shampoo de asientos y alfombras", "Acabado de llantas"] },
   { id: "pulido", name: "Pulido de Pintura", short: "Brillo profundo tipo espejo.", price: null, icon: "polisher", img: "glossGray",
     features: ["Pulido de una o varias etapas", "Elimina opacidad y marcas", "Realza el color", "Acabado con protección"] },
   { id: "llantas", name: "Llantas y Rines", short: "Rines brillantes y llantas renovadas.", price: null, icon: "wheel", img: "wheel",
@@ -75,12 +81,16 @@ export const SERVICES: Service[] = [
     features: ["Shampoo y extracción", "Tela, piel o vinil", "Eliminación de manchas", "Secado rápido"] },
 ];
 
-export const PRICING = [
-  { name: "Limpieza Básica", desc: "Ideal para el mantenimiento regular de tu vehículo.", price: 79, icon: "car" as IconName, service: "limpieza", featured: false,
+// price: null = "Solicitar Cotización"; regular = crossed-out original price
+export const PRICING: {
+  name: string; desc: string; price: number | null; regular?: number; veteran?: boolean;
+  icon: IconName; service: string; featured: boolean; features: string[];
+}[] = [
+  { name: "Limpieza Básica", desc: "Ideal para el mantenimiento regular de tu vehículo.", price: 150, veteran: true, icon: "car", service: "limpieza", featured: false,
     features: ["Lavado exterior a mano", "Aspirado interior", "Limpieza de vidrios", "Llantas y rines"] },
-  { name: "Detailing Completo", desc: "Limpieza profunda interior y exterior.", price: 79, icon: "layers" as IconName, service: "completo", featured: true,
+  { name: "Detailing Completo con Shampoo", desc: "Limpieza profunda interior y exterior, con shampoo.", price: 200, regular: 280, icon: "layers", service: "completo", featured: true,
     features: ["Todo lo de Limpieza Básica", "Shampoo de asientos y alfombras", "Tratamiento de olores", "Protección de pintura"] },
-  { name: "Restauración de Pintura", desc: "Recupera el brillo original de tu pintura.", price: null, icon: "sparkle" as IconName, service: "pintura", featured: false,
+  { name: "Restauración de Pintura", desc: "Recupera el brillo original de tu pintura.", price: null, icon: "sparkle", service: "pintura", featured: false,
     features: ["Evaluación de la pintura", "Descontaminación", "Pulido a máquina", "Sellado protector"] },
 ];
 

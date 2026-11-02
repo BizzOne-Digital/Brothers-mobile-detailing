@@ -5,7 +5,7 @@ import { CtaBanner, OfferBlock, PageHero, PricingCards } from "@/components/sect
 
 export const metadata: Metadata = {
   title: "Precios",
-  description: "Precios de detailing a domicilio desde $79. Limpieza básica, detailing completo y restauración de pintura.",
+  description: "Precios de detailing a domicilio desde $150. Limpieza básica, detailing completo y restauración de pintura.",
 };
 
 const FACTORS: [IconName, string, string][] = [
@@ -19,7 +19,7 @@ export default function PreciosPage() {
   return (
     <>
       <PageHero crumb="Precios" eyebrow="Precios" title="Precios Claros," highlight="Sin Sorpresas" image="glossBlack"
-        text="Servicios desde $79. Te confirmamos el precio final antes de empezar, según el tamaño y la condición de tu vehículo." />
+        text="Servicios desde $150. Te confirmamos el precio final antes de empezar, según el tamaño y la condición de tu vehículo." />
 
       <section className="section section--gray">
         <div className="container">

@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import Field from "./Field";
 import Icon from "./Icon";
-import { SERVICES, SITE, TIMES, VEHICLES } from "@/lib/site";
+import { SERVICES, SITE, TIMES, VEHICLES, VETERAN_DISCOUNT, veteranPrice } from "@/lib/site";
 import { validate, validateAll, type Rule } from "@/lib/validation";
 import { useToday } from "@/lib/useToday";
 
@@ -71,7 +71,8 @@ export default function BookingWizard() {
   const svc = SERVICES.find((s) => s.id === d.service);
   const summary: [string, string][] = [
     ["Servicio", svc?.name ?? ""],
-    ["Precio", svc?.price != null ? `Desde $${svc.price}` : "Por cotizar"],
+    ["Precio", svc?.price != null ? `${svc.regular ? `$${svc.regular} → ` : "Desde "}$${svc.price}` : "Por cotizar"],
+    ...(svc?.veteran && svc.price != null ? [["Veteranos militares", `${VETERAN_DISCOUNT}% de descuento: $${veteranPrice(svc.price).toFixed(2)}`] as [string, string]] : []),
     ["Vehículo", d.vehicle],
     ["Fecha", d.date ? new Date(d.date + "T12:00").toLocaleDateString("es-US", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""],
     ["Hora", d.time],

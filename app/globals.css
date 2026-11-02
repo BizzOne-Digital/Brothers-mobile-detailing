@@ -543,3 +543,11 @@ textarea.input { min-height: 130px; resize: vertical; }
   .summary dd { text-align: left; }
   .cta-banner { padding: 90px 0; }
 }
+
+/* Crossed-out regular price + veteran discount note */
+.price-tag s { color: var(--gray-500); font-weight: 600; }
+.p-card__price s { font-size: 1.3rem; font-weight: 700; font-style: italic; opacity: .55; align-self: center; }
+.veteran-note { display: flex; gap: 10px; align-items: flex-start; margin: 14px 0 0; padding: 10px 12px; border-radius: 10px; background: rgba(227, 20, 27, .07); border: 1px dashed rgba(227, 20, 27, .4); font-size: .86rem; line-height: 1.4; color: var(--gray-700); }
+.veteran-note svg { width: 18px; height: 18px; color: var(--red); margin-top: 1px; }
+.p-card .veteran-note { margin: -8px 0 22px; }
+.p-card--featured .veteran-note { color: rgba(255, 255, 255, .8); }

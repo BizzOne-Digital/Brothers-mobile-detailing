@@ -3,7 +3,7 @@ import Image from "@/components/Photo";
 import Link from "next/link";
 import Icon, { type IconName } from "./Icon";
 import { Brush } from "./ui";
-import { img, PRICING, SITE, TESTIMONIALS, type ImgKey, type Service } from "@/lib/site";
+import { img, PRICING, SITE, TESTIMONIALS, VETERAN_DISCOUNT, veteranPrice, type ImgKey, type Service } from "@/lib/site";
 import { photo } from "@/lib/photo";
 
 export function PageHero({ crumb, eyebrow, title, highlight, text, image }: {
@@ -59,12 +59,23 @@ export function ServiceCard({ s, i, detailed }: { s: Service; i: number; detaile
         {detailed && <ul className="s-card__list">{s.features.map((f) => <li key={f}><Icon name="check" />{f}</li>)}</ul>}
         <div className="s-card__foot">
           {s.price != null
-            ? <span className="price-tag"><i>Desde</i> <b>${s.price}</b></span>
+            ? <span className="price-tag">{s.regular ? <s>${s.regular}</s> : <i>Desde</i>} <b>${s.price}</b></span>
             : <span className="price-tag price-tag--quote"><b>Cotizar</b></span>}
           <Link href={`/reservar?servicio=${s.id}`} className="link-arrow" aria-label={`Reservar ${s.name}`}>Reservar <Icon name="arrow" /></Link>
         </div>
+        {s.veteran && s.price != null && <VeteranNote price={s.price} />}
       </div>
     </article>
+  );
+}
+
+/** "15% de descuento para veteranos militares" badge */
+export function VeteranNote({ price }: { price: number }) {
+  return (
+    <p className="veteran-note">
+      <Icon name="shield" />
+      <span><strong>{VETERAN_DISCOUNT}% de descuento</strong> para veteranos militares: <strong>${veteranPrice(price).toFixed(2)}</strong></span>
+    </p>
   );
 }
 
@@ -73,13 +84,16 @@ export function PricingCards() {
     <div className="pricing">
       {PRICING.map((p, i) => (
         <article key={p.name} className={`p-card ${p.featured ? "p-card--featured" : ""} reveal reveal-d${i % 3}`}>
-          {p.featured && <span className="p-card__badge">Más popular</span>}
+          {p.featured && <span className="p-card__badge">{p.regular ? "Precio especial" : "Más popular"}</span>}
           <div className="p-card__icon"><Icon name={p.icon} /></div>
           <h3>{p.name}</h3>
           <p className="p-card__desc">{p.desc}</p>
           <div className="p-card__price">
-            {p.price != null ? <><small>Desde</small><strong>${p.price}</strong></> : <strong className="quote">Solicitar Cotización</strong>}
+            {p.price != null
+              ? <>{p.regular ? <s>${p.regular}</s> : <small>Desde</small>}<strong>${p.price}</strong></>
+              : <strong className="quote">Solicitar Cotización</strong>}
           </div>
+          {p.veteran && p.price != null && <VeteranNote price={p.price} />}
           <ul className="s-card__list">{p.features.map((f) => <li key={f}><Icon name="check" />{f}</li>)}</ul>
           <Link href={`/reservar?servicio=${p.service}`} className={`btn ${p.featured ? "btn--primary" : "btn--dark"} btn--block`}>
             <Icon name="calendar" /> {p.price != null ? "Reservar" : "Pedir Cotización"}

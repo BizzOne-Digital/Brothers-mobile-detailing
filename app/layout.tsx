@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "Brothers Mobile Detailing | Limpieza Profesional de Autos a Domicilio",
     template: "%s | Brothers Mobile Detailing",
   },
-  description: "Detailing profesional a domicilio. Limpieza de carros, limpieza profunda y restauración de pintura desde $79. Llama al 702-722-7601.",
+  description: "Detailing profesional a domicilio. Limpieza de carros, limpieza profunda y restauración de pintura desde $150. Llama al 702-722-7601.",
 };
 
 export const viewport: Viewport = { themeColor: "#0a0a0b" };
