@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import Icon from "./Icon";
 import { SITE } from "@/lib/site";
 
-export function Logo() {
+export function Logo({ homeHref = "/", label = "Home" }: { homeHref?: string; label?: string }) {
   return (
-    <Link href="/" className="logo" aria-label={`${SITE.name} — Inicio`}>
+    <Link href={homeHref} className="logo" aria-label={`${SITE.name} — ${label}`}>
       <svg viewBox="0 0 240 70" aria-hidden="true">
         <path d="M20 26c18-12 52-20 88-20 34 0 62 7 84 18 10 1 20 3 28 6" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
         <path d="M78 14c22-4 52-3 70 2l-16 8H70z" fill="#e3141b" opacity=".95" />
@@ -48,8 +48,8 @@ export function SectionHead({ eyebrow, title, highlight, lead }: { eyebrow: stri
   );
 }
 
-export function PriceNote() {
-  return <p className="note"><Icon name="info" /> Los precios pueden variar dependiendo del tamaño y condición del vehículo.</p>;
+export function PriceNote({ text }: { text: string }) {
+  return <p className="note"><Icon name="info" /> {text}</p>;
 }
 
 export function CheckList({ items }: { items: ReactNode[] }) {

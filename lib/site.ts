@@ -1,5 +1,6 @@
 /* =========================================================
-   SITE CONTENT — edit this file to update the whole website.
+   SITE DATA — language-neutral settings (prices, contact, images).
+   All visible text lives in lib/i18n/en.ts and lib/i18n/es.ts.
    ========================================================= */
 import type { IconName } from "@/components/Icon";
 
@@ -18,16 +19,18 @@ export const SITE = {
   year: 2026,
 };
 
+/** Route slugs — the same for every language (Spanish adds the /es prefix) */
 export const NAV = [
-  { href: "/", label: "Inicio" },
-  { href: "/servicios", label: "Servicios" },
-  { href: "/precios", label: "Precios" },
-  { href: "/galeria", label: "Galería" },
-  { href: "/nosotros", label: "Nosotros" },
-  { href: "/contacto", label: "Contacto" },
-];
+  { href: "/", key: "home" },
+  { href: "/services", key: "services" },
+  { href: "/pricing", key: "pricing" },
+  { href: "/gallery", key: "gallery" },
+  { href: "/about", key: "about" },
+  { href: "/contact", key: "contact" },
+] as const;
+export type NavKey = (typeof NAV)[number]["key"];
 
-// Unsplash photo IDs
+// Unsplash photo IDs (stock fallbacks)
 export const IMG = {
   hero: "photo-1520340356584-f9917d1eea6f",
   handWash: "photo-1607860108855-64acf2078ed9",
@@ -48,85 +51,55 @@ export type ImgKey = keyof typeof IMG;
 export const img = (key: ImgKey, w = 1200) =>
   `https://images.unsplash.com/${IMG[key]}?auto=format&fit=crop&w=${w}&q=80`;
 
-export type Service = {
-  id: string; name: string; short: string; price: number | null;
-  regular?: number;   // original price, shown crossed out next to `price`
-  veteran?: boolean;  // eligible for the military veteran discount
-  icon: IconName; img: ImgKey; home?: boolean; features: string[];
-};
-
 /** Military veteran discount (percent) — applies to services marked `veteran: true` */
 export const VETERAN_DISCOUNT = 15;
 export const veteranPrice = (price: number) => Math.round(price * (100 - VETERAN_DISCOUNT)) / 100;
 
-// `home: true` shows the card on the homepage. price: null = "Cotizar"
-export const SERVICES: Service[] = [
-  { id: "limpieza", name: "Limpieza de Carros", short: "Interior y exterior impecable.", price: 150, veteran: true, icon: "seat", img: "interior", home: true,
-    features: ["Lavado exterior a mano", "Aspirado completo", "Limpieza de tablero y paneles", "Vidrios sin manchas"] },
-  { id: "profunda", name: "Limpieza Profunda", short: "Elimina suciedad, manchas y olores.", price: null, icon: "drops", img: "handWash", home: true,
-    features: ["Shampoo de alfombras y asientos", "Eliminación de manchas", "Tratamiento de olores", "Detalle de rincones y rejillas"] },
-  { id: "pintura", name: "Restauración de Pintura", short: "Recupera el brillo y la apariencia original.", price: null, icon: "sparkle", img: "polish", home: true,
-    features: ["Descontaminación de pintura", "Corrección de rayones leves", "Pulido a máquina", "Sellado y protección"] },
-  { id: "exterior", name: "Lavado Exterior", short: "Lavado a mano con espuma y secado sin rayas.", price: null, icon: "car", img: "wheelFoam",
-    features: ["Prelavado con espuma", "Lavado a mano, método de dos cubetas", "Secado con microfibra", "Llantas y rines"] },
-  { id: "interior", name: "Detallado Interior", short: "Cabina limpia, fresca y protegida.", price: null, icon: "seat", img: "interior",
-    features: ["Aspirado profundo", "Limpieza de plásticos y vinil", "Acondicionador de piel", "Vidrios interiores"] },
-  { id: "completo", name: "Detailing Completo con Shampoo", short: "Interior y exterior al máximo nivel, con shampoo.", price: 200, regular: 280, icon: "layers", img: "glossBlack",
-    features: ["Todo el lavado exterior", "Todo el detallado interior", "Shampoo de asientos y alfombras", "Acabado de llantas"] },
-  { id: "pulido", name: "Pulido de Pintura", short: "Brillo profundo tipo espejo.", price: null, icon: "polisher", img: "glossGray",
-    features: ["Pulido de una o varias etapas", "Elimina opacidad y marcas", "Realza el color", "Acabado con protección"] },
-  { id: "llantas", name: "Llantas y Rines", short: "Rines brillantes y llantas renovadas.", price: null, icon: "wheel", img: "wheel",
-    features: ["Descontaminación de rines", "Limpieza de pasos de rueda", "Abrillantador de llantas", "Detalle de birlos"] },
-  { id: "tapiceria", name: "Limpieza de Tapicería", short: "Asientos y alfombras como nuevos.", price: null, icon: "drops", img: "tire",
-    features: ["Shampoo y extracción", "Tela, piel o vinil", "Eliminación de manchas", "Secado rápido"] },
+export type ServiceId = "limpieza" | "profunda" | "pintura" | "exterior" | "interior" | "completo" | "pulido" | "llantas" | "tapiceria";
+
+// price: null = "Get a Quote"; regular = crossed-out original price; home = shown on the homepage
+export const SERVICE_DATA: {
+  id: ServiceId; price: number | null; regular?: number; veteran?: boolean; icon: IconName; img: ImgKey; home?: boolean;
+}[] = [
+  { id: "limpieza", price: 150, veteran: true, icon: "seat", img: "interior", home: true },
+  { id: "profunda", price: null, icon: "drops", img: "handWash", home: true },
+  { id: "pintura", price: null, icon: "sparkle", img: "polish", home: true },
+  { id: "exterior", price: null, icon: "car", img: "wheelFoam" },
+  { id: "interior", price: null, icon: "seat", img: "interior" },
+  { id: "completo", price: 200, regular: 280, icon: "layers", img: "glossBlack" },
+  { id: "pulido", price: null, icon: "polisher", img: "glossGray" },
+  { id: "llantas", price: null, icon: "wheel", img: "wheel" },
+  { id: "tapiceria", price: null, icon: "drops", img: "tire" },
 ];
 
-// price: null = "Solicitar Cotización"; regular = crossed-out original price
-export const PRICING: {
-  name: string; desc: string; price: number | null; regular?: number; veteran?: boolean;
-  icon: IconName; service: string; featured: boolean; features: string[];
+// Pricing cards (text in the dictionaries under `pricing.<service>`)
+export const PRICING_DATA: {
+  service: "limpieza" | "completo" | "pintura"; price: number | null; regular?: number; veteran?: boolean; icon: IconName; featured: boolean;
 }[] = [
-  { name: "Limpieza Básica", desc: "Ideal para el mantenimiento regular de tu vehículo.", price: 150, veteran: true, icon: "car", service: "limpieza", featured: false,
-    features: ["Lavado exterior a mano", "Aspirado interior", "Limpieza de vidrios", "Llantas y rines"] },
-  { name: "Detailing Completo con Shampoo", desc: "Limpieza profunda interior y exterior, con shampoo.", price: 200, regular: 280, icon: "layers", service: "completo", featured: true,
-    features: ["Todo lo de Limpieza Básica", "Shampoo de asientos y alfombras", "Tratamiento de olores", "Protección de pintura"] },
-  { name: "Restauración de Pintura", desc: "Recupera el brillo original de tu pintura.", price: null, icon: "sparkle", service: "pintura", featured: false,
-    features: ["Evaluación de la pintura", "Descontaminación", "Pulido a máquina", "Sellado protector"] },
+  { service: "limpieza", price: 150, veteran: true, icon: "car", featured: false },
+  { service: "completo", price: 200, regular: 280, icon: "layers", featured: true },
+  { service: "pintura", price: null, icon: "sparkle", featured: false },
 ];
 
 export type GalleryCat = "exterior" | "interior" | "pintura" | "antes";
-export const GALLERY_LABELS: Record<GalleryCat, string> = {
-  exterior: "Exterior", interior: "Interior", pintura: "Restauración de Pintura", antes: "Antes y Después",
-};
-// ratio controls masonry tile shape
-export const GALLERY: { img: ImgKey; cat: GalleryCat; title: string; ratio: string }[] = [
-  { img: "hero", cat: "exterior", title: "Lavado con espuma", ratio: "4/5" },
-  { img: "interior", cat: "interior", title: "Interior impecable", ratio: "4/3" },
-  { img: "polish", cat: "pintura", title: "Cuidado de faros y pintura", ratio: "1/1" },
-  { img: "glossBlack", cat: "exterior", title: "Acabado brillante", ratio: "4/3" },
-  { img: "wheelFoam", cat: "exterior", title: "Rines y llantas", ratio: "4/5" },
-  { img: "glossRed", cat: "pintura", title: "Brillo profundo", ratio: "4/3" },
-  { img: "handWash", cat: "antes", title: "Proceso de lavado a mano", ratio: "1/1" },
-  { img: "glossGray", cat: "pintura", title: "Pintura restaurada", ratio: "4/3" },
-  { img: "wheel", cat: "exterior", title: "Detalle de rines", ratio: "4/5" },
-  { img: "garage", cat: "antes", title: "Resultado final", ratio: "4/3" },
-  { img: "redHeadlight", cat: "pintura", title: "Corrección de pintura", ratio: "1/1" },
-  { img: "blackSuv", cat: "exterior", title: "SUV detallada", ratio: "4/3" },
+// ratio controls masonry tile shape; titles are in the dictionaries (same order)
+export const GALLERY_DATA: { img: ImgKey; cat: GalleryCat; ratio: string }[] = [
+  { img: "hero", cat: "exterior", ratio: "4/5" },
+  { img: "interior", cat: "interior", ratio: "4/3" },
+  { img: "polish", cat: "pintura", ratio: "1/1" },
+  { img: "glossBlack", cat: "exterior", ratio: "4/3" },
+  { img: "wheelFoam", cat: "exterior", ratio: "4/5" },
+  { img: "glossRed", cat: "pintura", ratio: "4/3" },
+  { img: "handWash", cat: "antes", ratio: "1/1" },
+  { img: "glossGray", cat: "pintura", ratio: "4/3" },
+  { img: "wheel", cat: "exterior", ratio: "4/5" },
+  { img: "garage", cat: "antes", ratio: "4/3" },
+  { img: "redHeadlight", cat: "pintura", ratio: "1/1" },
+  { img: "blackSuv", cat: "exterior", ratio: "4/3" },
 ];
 
-// Placeholder testimonials — replace with real customer reviews
-export const TESTIMONIALS = [
-  { name: "Cliente 1", service: "Detailing Completo", text: "Excelente servicio. Llegaron a mi casa a tiempo y dejaron mi carro como nuevo por dentro y por fuera." },
-  { name: "Cliente 2", service: "Limpieza Profunda", text: "Quitaron manchas de los asientos que pensé que eran permanentes. Muy profesionales y cuidadosos." },
-  { name: "Cliente 3", service: "Restauración de Pintura", text: "La pintura recuperó su brillo. Se nota la atención al detalle. Los recomiendo totalmente." },
-];
-
-export const VEHICLES = [
-  { value: "Sedán / Coupé", note: "Autos compactos y medianos", icon: "car" as IconName },
-  { value: "SUV", note: "Crossovers y SUVs", icon: "suv" as IconName },
-  { value: "Camioneta / Pickup", note: "Trucks de cabina doble", icon: "truck" as IconName },
-  { value: "Van / Minivan", note: "Vehículos de 3 filas", icon: "suv" as IconName },
-];
+// Vehicle types (labels in the dictionaries, same order)
+export const VEHICLE_ICONS: IconName[] = ["car", "suv", "truck", "suv"];
 
 // Booking time slots — edit to match real availability
 export const TIMES = ["8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM"];

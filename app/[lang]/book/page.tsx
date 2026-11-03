@@ -2,22 +2,23 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import BookingWizard from "@/components/BookingWizard";
 import { PageHero } from "@/components/sections";
+import { getDict } from "@/lib/i18n";
 
-export const metadata: Metadata = {
-  title: "Agenda tu Cita",
-  description: "Reserva tu servicio de detailing a domicilio en pocos pasos.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { t } = await getDict();
+  return t.booking.meta;
+}
 
-export default function ReservarPage() {
+export default async function BookPage() {
+  const { lang, t } = await getDict();
   return (
     <>
-      <PageHero crumb="Reservar" eyebrow="Reservar" title="Agenda tu" highlight="Cita" image="hero"
-        text="Elige tu servicio, tu vehículo y el horario. Nosotros vamos a ti." />
+      <PageHero hero={t.booking.hero} image="hero" />
       <section className="booking-wrap">
         <div className="container">
           {/* useSearchParams (preselected service) requires a Suspense boundary */}
           <Suspense fallback={<div className="wizard" style={{ minHeight: 480 }} />}>
-            <BookingWizard />
+            <BookingWizard t={t} lang={lang} />
           </Suspense>
         </div>
       </section>

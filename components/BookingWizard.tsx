@@ -4,7 +4,9 @@ import { useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import Field from "./Field";
 import Icon from "./Icon";
-import { SERVICES, SITE, TIMES, VEHICLES, VETERAN_DISCOUNT, veteranPrice } from "@/lib/site";
+import { SERVICE_DATA, SITE, TIMES, VEHICLE_ICONS, VETERAN_DISCOUNT, veteranPrice } from "@/lib/site";
+import type { Dict } from "@/lib/i18n/en";
+import { href, type Locale } from "@/lib/i18n/config";
 import { validate, validateAll, type Rule } from "@/lib/validation";
 import { useToday } from "@/lib/useToday";
 
@@ -16,9 +18,9 @@ type DetailKey = "name" | "phone" | "email" | "area" | "address";
 const DETAILS: Record<DetailKey, Rule[]> = {
   name: ["required", "name"], phone: ["required", "phone"], email: ["required", "email"], area: ["required"], address: ["required"],
 };
-const STEPS = ["Servicio", "Vehículo", "Fecha", "Tus datos", "Confirmar"];
 
-export default function BookingWizard() {
+export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
+  const b = t.booking;
   const params = useSearchParams();
   const preset = params.get("servicio");
   const offer = params.get("oferta");
@@ -26,12 +28,13 @@ export default function BookingWizard() {
   const [step, setStep] = useState(1);
   const [stepError, setStepError] = useState(false);
   const [sending, setSending] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof Data, string>>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof Data, Rule | "">>>({});
   const [d, setD] = useState<Data>({
-    service: SERVICES.some((s) => s.id === preset) ? preset! : "", vehicle: "", date: "", time: "",
+    service: SERVICE_DATA.some((s) => s.id === preset) ? preset! : "", vehicle: "", date: "", time: "",
     name: "", phone: "", email: "", area: "", address: "", notes: "",
   });
   const top = useRef<HTMLFormElement>(null);
+  const errText = (k: keyof Data) => (errors[k] ? t.form.errors[errors[k] as Rule] : undefined);
 
   const set = (k: keyof Data, v: string) => {
     setD((s) => ({ ...s, [k]: v }));
@@ -68,24 +71,25 @@ export default function BookingWizard() {
     go(step + 1);
   };
 
-  const svc = SERVICES.find((s) => s.id === d.service);
+  const svc = SERVICE_DATA.find((s) => s.id === d.service);
+  const s = b.summary;
   const summary: [string, string][] = [
-    ["Servicio", svc?.name ?? ""],
-    ["Precio", svc?.price != null ? `${svc.regular ? `$${svc.regular} → ` : "Desde "}$${svc.price}` : "Por cotizar"],
-    ...(svc?.veteran && svc.price != null ? [["Veteranos militares", `${VETERAN_DISCOUNT}% de descuento: $${veteranPrice(svc.price).toFixed(2)}`] as [string, string]] : []),
-    ["Vehículo", d.vehicle],
-    ["Fecha", d.date ? new Date(d.date + "T12:00").toLocaleDateString("es-US", { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""],
-    ["Hora", d.time],
-    ["Nombre", d.name],
-    ["Teléfono", d.phone],
-    ["Email", d.email],
-    ["Dirección", `${d.address}, ${d.area}`],
-    ...(d.notes ? [["Notas", d.notes] as [string, string]] : []),
-    ...(offer ? [["Promoción", `Oferta Especial $${SITE.offerAmount}`] as [string, string]] : []),
+    [s.service, svc ? t.services[svc.id].name : ""],
+    [s.price, svc?.price != null ? `${svc.regular ? `$${svc.regular} → ` : `${t.common.from} `}$${svc.price}` : b.byQuote],
+    ...(svc?.veteran && svc.price != null ? [[s.veteran, `${VETERAN_DISCOUNT}% ${t.common.discount}: $${veteranPrice(svc.price).toFixed(2)}`] as [string, string]] : []),
+    [s.vehicle, d.vehicle],
+    [s.date, d.date ? new Date(d.date + "T12:00").toLocaleDateString(t.dateLocale, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""],
+    [s.time, d.time],
+    [s.name, d.name],
+    [s.phone, d.phone],
+    [s.email, d.email],
+    [s.address, `${d.address}, ${d.area}`],
+    ...(d.notes ? [[s.notes, d.notes] as [string, string]] : []),
+    ...(offer ? [[s.promo, `${b.promoValue} $${SITE.offerAmount}`] as [string, string]] : []),
   ];
 
   const text = (k: DetailKey, label: string, props: Record<string, string> = {}, full = false) => (
-    <Field id={`b-${k}`} label={label} required error={errors[k]} full={full}>
+    <Field id={`b-${k}`} label={label} required error={errText(k)} full={full}>
       <input id={`b-${k}`} className="input" value={d[k]} onChange={(e) => set(k, e.target.value)}
         onBlur={() => setErrors((er) => ({ ...er, [k]: validate(d[k], DETAILS[k]) }))} {...props} />
     </Field>
@@ -95,8 +99,8 @@ export default function BookingWizard() {
 
   return (
     <form className="wizard" ref={top} noValidate onSubmit={(e) => { e.preventDefault(); next(); }}>
-      <ol className="progress" aria-label="Progreso de la reserva">
-        {STEPS.map((label, i) => (
+      <ol className="progress" aria-label={b.progress}>
+        {b.steps.map((label, i) => (
           <li key={label} className={i + 1 < step ? "is-done" : i + 1 === step ? "is-current" : ""}>
             <span>{i + 1 < step ? <Icon name="check" /> : i + 1}</span>{label}
           </li>
@@ -105,81 +109,84 @@ export default function BookingWizard() {
 
       {step === 1 && (
         <div className="w-step is-active">
-          <h2>¿Qué servicio necesitas?</h2>
-          <p>Puedes agregar detalles adicionales más adelante.</p>
+          <h2>{b.s1.title}</h2>
+          <p>{b.s1.text}</p>
           <div className="options">
-            {SERVICES.map((s) => (
-              <div className="option" key={s.id}>
-                <input type="radio" name="service" id={`s-${s.id}`} checked={d.service === s.id} onChange={() => set("service", s.id)} />
-                <label htmlFor={`s-${s.id}`}><Icon name={s.icon} /><strong>{s.name}</strong><small>{s.price != null ? `Desde $${s.price}` : "Cotización"}</small></label>
+            {SERVICE_DATA.map((sv) => (
+              <div className="option" key={sv.id}>
+                <input type="radio" name="service" id={`s-${sv.id}`} checked={d.service === sv.id} onChange={() => set("service", sv.id)} />
+                <label htmlFor={`s-${sv.id}`}><Icon name={sv.icon} /><strong>{t.services[sv.id].name}</strong>
+                  <small>{sv.price != null ? `${sv.regular ? `$${sv.regular} → ` : `${t.common.from} `}$${sv.price}` : t.common.quote}</small></label>
               </div>
             ))}
           </div>
-          {renderStepError("Selecciona un servicio para continuar.")}
+          {renderStepError(b.s1.err)}
         </div>
       )}
 
       {step === 2 && (
         <div className="w-step is-active">
-          <h2>Tipo de vehículo</h2>
-          <p>El precio final puede variar según el tamaño y la condición.</p>
+          <h2>{b.s2.title}</h2>
+          <p>{b.s2.text}</p>
           <div className="options">
-            {VEHICLES.map((v, i) => (
-              <div className="option" key={v.value}>
-                <input type="radio" name="vehicle" id={`v${i}`} checked={d.vehicle === v.value} onChange={() => set("vehicle", v.value)} />
-                <label htmlFor={`v${i}`}><Icon name={v.icon} /><strong>{v.value}</strong><small>{v.note}</small></label>
+            {t.vehicles.map((v, i) => (
+              <div className="option" key={v.name}>
+                <input type="radio" name="vehicle" id={`v${i}`} checked={d.vehicle === v.name} onChange={() => set("vehicle", v.name)} />
+                <label htmlFor={`v${i}`}><Icon name={VEHICLE_ICONS[i]} /><strong>{v.name}</strong><small>{v.note}</small></label>
               </div>
             ))}
           </div>
-          {renderStepError("Selecciona el tipo de vehículo.")}
+          {renderStepError(b.s2.err)}
         </div>
       )}
 
       {step === 3 && (
         <div className="w-step is-active">
-          <h2>Fecha y hora</h2>
-          <p>Elige el día y el horario que prefieras. Te confirmaremos la disponibilidad.</p>
+          <h2>{b.s3.title}</h2>
+          <p>{b.s3.text}</p>
           <div style={{ maxWidth: 320, margin: "20px 0" }}>
-            <Field id="b-date" label="Fecha" required error={errors.date}>
+            <Field id="b-date" label={b.s3.date} required error={errText("date")}>
               <input id="b-date" type="date" className="input" min={minDate} value={d.date} onChange={(e) => set("date", e.target.value)} />
             </Field>
           </div>
-          <span style={{ fontWeight: 600, fontSize: ".92rem" }}>Horario <span className="text-red">*</span></span>
+          <span style={{ fontWeight: 600, fontSize: ".92rem" }}>{b.s3.time} <span className="text-red">*</span></span>
           <div className="times options" style={{ marginTop: 8 }}>
-            {TIMES.map((t, i) => (
-              <div className="option" key={t}>
-                <input type="radio" name="time" id={`t${i}`} checked={d.time === t} onChange={() => set("time", t)} />
-                <label htmlFor={`t${i}`}>{t}</label>
+            {TIMES.map((tm, i) => (
+              <div className="option" key={tm}>
+                <input type="radio" name="time" id={`t${i}`} checked={d.time === tm} onChange={() => set("time", tm)} />
+                <label htmlFor={`t${i}`}>{tm}</label>
               </div>
             ))}
           </div>
-          {renderStepError("Selecciona una fecha válida y un horario.")}
+          {renderStepError(b.s3.err)}
         </div>
       )}
 
       {step === 4 && (
         <div className="w-step is-active">
-          <h2>Tus datos</h2>
-          <p>Los usamos solo para confirmar tu cita.</p>
+          <h2>{b.s4.title}</h2>
+          <p>{b.s4.text}</p>
           <div className="form-grid" style={{ marginTop: 20 }}>
-            {text("name", "Nombre", { autoComplete: "name" })}
-            {text("phone", "Teléfono", { type: "tel", autoComplete: "tel" })}
-            {text("email", "Email", { type: "email", autoComplete: "email" })}
-            {text("area", "Zona de servicio", { placeholder: "Ciudad o código postal" })}
-            {text("address", "Dirección del servicio", { autoComplete: "street-address" }, true)}
-            <Field id="b-notes" label="Notas (opcional)" full>
-              <textarea id="b-notes" className="input" value={d.notes} onChange={(e) => set("notes", e.target.value)} placeholder="Condición del vehículo, acceso, mascotas, etc." />
+            {text("name", t.form.name, { autoComplete: "name" })}
+            {text("phone", t.form.phone, { type: "tel", autoComplete: "tel" })}
+            {text("email", t.form.email, { type: "email", autoComplete: "email" })}
+            {text("area", t.form.area, { placeholder: t.form.areaPh })}
+            {text("address", b.s4.address, { autoComplete: "street-address" }, true)}
+            <Field id="b-notes" label={b.s4.notes} full>
+              <textarea id="b-notes" className="input" value={d.notes} onChange={(e) => set("notes", e.target.value)} placeholder={b.s4.notesPh} />
             </Field>
           </div>
+          <p className="self-note"><Icon name="droplet" /> {b.selfNote}</p>
         </div>
       )}
 
       {step === 5 && (
         <div className="w-step is-active">
-          <h2>Confirma tu reserva</h2>
-          <p>Revisa los datos antes de enviar.</p>
+          <h2>{b.s5.title}</h2>
+          <p>{b.s5.text}</p>
           <dl className="summary">{summary.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-          <p className="note" style={{ justifyContent: "flex-start", textAlign: "left", marginTop: 0 }}><Icon name="info" /> Los precios pueden variar dependiendo del tamaño y condición del vehículo.</p>
+          <p className="self-note"><Icon name="droplet" /> {b.selfNote}</p>
+          <p className="note" style={{ justifyContent: "flex-start", textAlign: "left", marginTop: 12 }}><Icon name="info" /> {t.common.priceNote}</p>
         </div>
       )}
 
@@ -187,13 +194,13 @@ export default function BookingWizard() {
         <div className="w-step is-active">
           <div className="success">
             <div className="success__icon"><Icon name="check" /></div>
-            <h2>¡Solicitud recibida!</h2>
+            <h2>{b.done.title}</h2>
             <p style={{ color: "var(--gray-500)", maxWidth: 480, margin: "0 auto 26px" }}>
-              Gracias por elegir {SITE.name}. Te contactaremos pronto para confirmar tu cita. Si es urgente, llámanos al{" "}
-              <a href={SITE.phoneHref} className="text-red" style={{ fontWeight: 700 }}>{SITE.phone}</a> o al{" "}
+              {b.done.text}{" "}
+              <a href={SITE.phoneHref} className="text-red" style={{ fontWeight: 700 }}>{SITE.phone}</a> {b.done.or}{" "}
               <a href={SITE.phone2Href} className="text-red" style={{ fontWeight: 700 }}>{SITE.phone2}</a>.
             </p>
-            <Link href="/" className="btn btn--dark">Volver al Inicio</Link>
+            <Link href={href(lang, "/")} className="btn btn--dark">{b.done.back}</Link>
           </div>
         </div>
       )}
@@ -201,10 +208,10 @@ export default function BookingWizard() {
       {step <= 5 && (
         <div className="w-nav">
           <button type="button" className="btn btn--outline-dark" style={{ visibility: step > 1 ? "visible" : "hidden" }} onClick={() => go(step - 1)}>
-            <Icon name="arrowLeft" /> Atrás
+            <Icon name="arrowLeft" /> {b.nav.back}
           </button>
           <button type="submit" className={`btn btn--primary ${sending ? "is-loading" : ""}`}>
-            {step === 5 ? <><Icon name="checkCircle" /> Confirmar Reserva</> : <>Continuar <Icon name="arrow" className="icon-arrow" /></>}
+            {step === 5 ? <><Icon name="checkCircle" /> {b.nav.confirm}</> : <>{b.nav.next} <Icon name="arrow" className="icon-arrow" /></>}
           </button>
         </div>
       )}

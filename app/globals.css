@@ -551,3 +551,52 @@ textarea.input { min-height: 130px; resize: vertical; }
 .veteran-note svg { width: 18px; height: 18px; color: var(--red); margin-top: 1px; }
 .p-card .veteran-note { margin: -8px 0 22px; }
 .p-card--featured .veteran-note { color: rgba(255, 255, 255, .8); }
+
+/* Language switch (EN | ES) */
+.lang-switch { display: inline-flex; padding: 3px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .25); background: rgba(255, 255, 255, .04); }
+.lang-switch a { min-width: 40px; height: 34px; padding: 0 10px; display: grid; place-items: center; border-radius: 999px; font-size: .82rem; font-weight: 700; letter-spacing: .06em; color: rgba(255, 255, 255, .7); transition: background .2s, color .2s; }
+.lang-switch a:hover { color: #fff; }
+.lang-switch a.is-active { background: var(--red); color: #fff; }
+.drawer__bottom .lang-switch { justify-self: center; margin-bottom: 6px; }
+.drawer__bottom .lang-switch a { min-width: 64px; height: 42px; font-size: .95rem; }
+
+/* Filtered water + own power section */
+.self { padding: 110px 0 30px; }
+.self--dark { background: var(--black); color: #fff; padding: 100px 0; }
+.self--dark .lead { color: rgba(255, 255, 255, .7); }
+.self__grid { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 24px; align-items: stretch; }
+.self__intro { align-self: center; padding-right: 10px; }
+.self__intro .lead { margin-top: 18px; }
+.self__card { position: relative; overflow: hidden; padding: 34px 28px; border-radius: var(--radius-lg); background: var(--black); color: #fff; box-shadow: var(--shadow); transition: transform .4s var(--ease); isolation: isolate; }
+.self__card::after { content: ""; position: absolute; width: 260px; height: 260px; right: -110px; top: -110px; border-radius: 50%; background: radial-gradient(circle, rgba(227, 20, 27, .4), transparent 65%); z-index: -1; }
+.self__card:hover { transform: translateY(-6px); }
+.self--dark .self__card { background: var(--charcoal); border: 1px solid rgba(255, 255, 255, .08); }
+.self__icon { width: 64px; height: 64px; border-radius: 18px; background: var(--red); display: grid; place-items: center; margin-bottom: 22px; box-shadow: 0 10px 30px var(--red-glow); }
+.self__icon svg { width: 32px; height: 32px; }
+.self__card h3 { font-size: 1.35rem; font-style: italic; }
+.self__card p { color: rgba(255, 255, 255, .72); margin: 0; }
+.self-note { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 0; padding: 14px 16px; border-radius: 12px; background: var(--gray-50); border-left: 3px solid var(--red); font-size: .93rem; color: var(--gray-700); }
+.self-note svg { width: 20px; height: 20px; color: var(--red); margin-top: 1px; }
+.why-grid--6 { grid-template-columns: repeat(3, 1fr); }
+
+@media (max-width: 1080px) {
+  .self__grid { grid-template-columns: 1fr 1fr; }
+  .self__intro { grid-column: 1 / -1; text-align: center; padding: 0; }
+  .self__intro .brush, .self__intro .lead { margin-left: auto; margin-right: auto; }
+  .why-grid--6 { grid-template-columns: repeat(2, 1fr); }
+  .nav .lang-switch { margin-right: 4px; }
+}
+@media (max-width: 860px) {
+  .self { padding: 80px 0 10px; }
+  .self--dark { padding: 80px 0; }
+}
+@media (max-width: 600px) {
+  .self__grid, .why-grid--6 { grid-template-columns: 1fr; }
+  .nav .lang-switch a { min-width: 34px; height: 32px; padding: 0 8px; }
+}
+@media (max-width: 600px) {
+  .nav__inner { gap: 10px; }
+  .nav .logo svg { width: 150px; }
+  .nav__actions { gap: 8px; }
+  .nav__toggle { width: 44px; height: 44px; }
+}

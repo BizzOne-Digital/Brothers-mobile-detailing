@@ -5,8 +5,24 @@ import { useEffect, useState } from "react";
 import Icon from "./Icon";
 import { Logo, Socials } from "./ui";
 import { NAV, SITE } from "@/lib/site";
+import { barePath, href, switchPath, type Locale } from "@/lib/i18n/config";
+import type { Dict } from "@/lib/i18n/en";
 
-export default function Navbar() {
+/** EN | ES toggle — goes to the same page in the other language */
+function LangSwitch({ lang, pathname, label, onPick }: { lang: Locale; pathname: string; label: string; onPick?: () => void }) {
+  return (
+    <div className="lang-switch" role="group" aria-label={label}>
+      {(["en", "es"] as const).map((l) => (
+        <Link key={l} href={switchPath(pathname, l)} hrefLang={l} className={l === lang ? "is-active" : ""}
+          aria-current={l === lang ? "true" : undefined} onClick={onPick} prefetch={false}>
+          {l.toUpperCase()}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+export default function Navbar({ lang, t }: { lang: Locale; t: Dict["nav"] }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -25,29 +41,31 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-
-  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  const bare = barePath(pathname);
+  const isActive = (p: string) => (p === "/" ? bare === "/" : bare.startsWith(p));
+  const close = () => setOpen(false);
 
   return (
     <>
-      <a className="skip-link" href="#main">Saltar al contenido</a>
+      <a className="skip-link" href="#main">{t.skip}</a>
       <header className={`nav ${scrolled ? "is-scrolled" : ""}`}>
         <div className="container nav__inner">
-          <Logo />
-          <nav aria-label="Principal">
+          <Logo homeHref={href(lang, "/")} label={t.home} />
+          <nav aria-label={t.main}>
             <ul className="nav__links">
               {NAV.map((n) => (
                 <li key={n.href}>
-                  <Link href={n.href} className={isActive(n.href) ? "is-active" : ""} aria-current={isActive(n.href) ? "page" : undefined}>{n.label}</Link>
+                  <Link href={href(lang, n.href)} className={isActive(n.href) ? "is-active" : ""} aria-current={isActive(n.href) ? "page" : undefined}>{t[n.key]}</Link>
                 </li>
               ))}
             </ul>
           </nav>
           <div className="nav__actions">
+            <LangSwitch lang={lang} pathname={pathname} label={t.switchLabel} />
             <Socials />
             <a href={SITE.phoneHref} className="btn btn--sm nav__phone"><Icon name="phone" /> {SITE.phone}</a>
-            <Link href="/reservar" className="btn btn--primary btn--sm nav__cta"><Icon name="calendar" /> Agenda tu Cita</Link>
-            <button className="nav__toggle" aria-label="Abrir menú" aria-expanded={open} aria-controls="drawer" onClick={() => setOpen(true)}>
+            <Link href={href(lang, "/book")} className="btn btn--primary btn--sm nav__cta"><Icon name="calendar" /> {t.book}</Link>
+            <button className="nav__toggle" aria-label={t.openMenu} aria-expanded={open} aria-controls="drawer" onClick={() => setOpen(true)}>
               <Icon name="menu" />
             </button>
           </div>
@@ -56,18 +74,19 @@ export default function Navbar() {
 
       <div className={`drawer ${open ? "is-open" : ""}`} id="drawer" aria-hidden={!open}>
         <div className="drawer__top">
-          <Logo />
-          <button className="nav__toggle" style={{ display: "grid" }} aria-label="Cerrar menú" onClick={() => setOpen(false)}><Icon name="close" /></button>
+          <Logo homeHref={href(lang, "/")} label={t.home} />
+          <button className="nav__toggle" style={{ display: "grid" }} aria-label={t.closeMenu} onClick={close}><Icon name="close" /></button>
         </div>
         <ul className="drawer__links">
           {NAV.map((n, i) => (
             <li key={n.href} style={{ transitionDelay: `${0.08 + i * 0.05}s` }}>
-              <Link href={n.href} className={isActive(n.href) ? "is-active" : ""} onClick={() => setOpen(false)}>{n.label} <Icon name="chevron" /></Link>
+              <Link href={href(lang, n.href)} className={isActive(n.href) ? "is-active" : ""} onClick={close}>{t[n.key]} <Icon name="chevron" /></Link>
             </li>
           ))}
         </ul>
         <div className="drawer__bottom">
-          <Link href="/reservar" className="btn btn--primary btn--block" onClick={() => setOpen(false)}><Icon name="calendar" /> Agenda tu Cita</Link>
+          <LangSwitch lang={lang} pathname={pathname} label={t.switchLabel} onPick={close} />
+          <Link href={href(lang, "/book")} className="btn btn--primary btn--block" onClick={close}><Icon name="calendar" /> {t.book}</Link>
           <a href={SITE.phoneHref} className="btn btn--outline btn--block"><Icon name="phone" /> {SITE.phone}</a>
           <a href={SITE.phone2Href} className="btn btn--outline btn--block"><Icon name="phone" /> {SITE.phone2}</a>
           <Socials />
@@ -75,8 +94,8 @@ export default function Navbar() {
       </div>
 
       <div className="mobile-bar">
-        <a href={SITE.phoneHref} className="btn btn--outline"><Icon name="phone" /> Llamar</a>
-        <Link href="/reservar" className="btn btn--primary"><Icon name="calendar" /> Agenda tu Cita</Link>
+        <a href={SITE.phoneHref} className="btn btn--outline"><Icon name="phone" /> {t.call}</a>
+        <Link href={href(lang, "/book")} className="btn btn--primary"><Icon name="calendar" /> {t.book}</Link>
       </div>
     </>
   );
