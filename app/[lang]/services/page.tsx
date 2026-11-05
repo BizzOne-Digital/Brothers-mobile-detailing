@@ -10,7 +10,7 @@ import { href } from "@/lib/i18n/config";
 
 // Which package includes each comparison row: [Basic, Full Detail, Restoration]
 const COMPARE: [boolean, boolean, boolean][] = [
-  [true, true, true], [true, true, false], [false, true, false], [false, true, false], [false, false, true], [false, true, true],
+  [true, true, true], [true, true, false], [false, true, false], [false, true, false], [false, false, true], [false, true, true], [false, true, false], [false, true, false],
 ];
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -109,24 +109,27 @@ const es: Dict = {
     profunda: { name: "Limpieza Profunda", short: "Elimina suciedad, manchas y olores.", features: ["Shampoo de alfombras y asientos", "Eliminación de manchas", "Tratamiento de olores", "Detalle de rincones y rejillas"] },
     pintura: { name: "Restauración de Pintura", short: "Recupera el brillo y la apariencia original.", features: ["Descontaminación de pintura", "Corrección de rayones leves", "Pulido a máquina", "Sellado y protección"] },
     exterior: { name: "Lavado Exterior", short: "Lavado a mano con espuma y secado sin rayas.", features: ["Prelavado con espuma", "Lavado a mano, método de dos cubetas", "Enjuague sin manchas con agua filtrada", "Llantas y rines"] },
-    interior: { name: "Detallado Interior", short: "Cabina limpia, fresca y protegida.", features: ["Aspirado profundo", "Limpieza de plásticos y vinil", "Acondicionador de piel", "Vidrios interiores"] },
-    completo: { name: "Detailing Completo con Shampoo", short: "Interior y exterior al máximo nivel, con shampoo.", features: ["Todo el lavado exterior", "Todo el detallado interior", "Shampoo de asientos y alfombras", "Acabado de llantas"] },
+    interior: { name: "Detallado Interior", short: "Cabina limpia, fresca y protegida.", features: ["Aspirado profundo", "Limpieza de plásticos y vinil", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel (si aplica)", "Vidrios interiores"] },
+    completo: { name: "Detailing Completo con Shampoo", short: "Interior y exterior al máximo nivel, con shampoo.", features: ["Todo el lavado exterior", "Todo el detallado interior", "Shampoo de asientos y alfombras", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel (si aplica)", "Acabado de llantas"] },
     pulido: { name: "Pulido de Pintura", short: "Brillo profundo tipo espejo.", features: ["Pulido de una o varias etapas", "Elimina opacidad y marcas", "Realza el color", "Acabado con protección"] },
     llantas: { name: "Llantas y Rines", short: "Rines brillantes y llantas renovadas.", features: ["Descontaminación de rines", "Limpieza de pasos de rueda", "Abrillantador de llantas", "Detalle de birlos"] },
     tapiceria: { name: "Limpieza de Tapicería", short: "Asientos y alfombras como nuevos.", features: ["Shampoo y extracción", "Tela, piel o vinil", "Eliminación de manchas", "Secado rápido"] },
+    piel: { name: "Limpieza y Acondicionado de Piel", short: "Limpia, nutre y protege los asientos de piel.", features: ["Limpieza suave de la piel", "Tratamiento acondicionador", "Incluido en Detallado Interior y Detailing Completo en vehículos con asientos de piel"] },
+    molduras: { name: "Restauración de Molduras", short: "Devuelve la vida a las molduras exteriores descoloridas.", features: ["Limpieza y preparación de molduras", "Restaura plástico y hule descolorido", "Acabado más oscuro e intenso"] },
+    ozono: { name: "Tratamiento de Ozono Interior", short: "Elimina olores a cigarro, marihuana y otros olores desagradables.", features: ["Para olores a cigarro y marihuana", "Trata otros olores desagradables", "Trata toda la cabina"] },
   },
   pricing: {
     limpieza: { name: "Limpieza Básica", desc: "Ideal para el mantenimiento regular de tu vehículo.", features: ["Lavado exterior a mano", "Aspirado interior", "Limpieza de vidrios", "Llantas y rines"] },
-    completo: { name: "Detailing Completo con Shampoo", desc: "Limpieza profunda interior y exterior, con shampoo.", features: ["Todo lo de Limpieza Básica", "Shampoo de asientos y alfombras", "Tratamiento de olores", "Protección de pintura"] },
+    completo: { name: "Detailing Completo con Shampoo", desc: "Limpieza profunda interior y exterior, con shampoo.", features: ["Todo lo de Limpieza Básica", "Shampoo de asientos y alfombras", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel (si aplica)", "Tratamiento de olores", "Protección de pintura"] },
     pintura: { name: "Restauración de Pintura", desc: "Recupera el brillo original de tu pintura.", features: ["Evaluación de la pintura", "Descontaminación", "Pulido a máquina", "Sellado protector"] },
   },
   servicesPage: {
-    meta: { title: "Servicios", description: "Lavado exterior, detallado interior, detailing completo con shampoo, limpieza profunda, restauración y pulido de pintura, llantas y tapicería. A domicilio." },
+    meta: { title: "Servicios", description: "Lavado exterior, detallado interior, detailing completo con shampoo, acondicionado de piel, tratamiento de ozono, restauración de molduras y pintura, llantas y tapicería. A domicilio." },
     hero: { crumb: "Servicios", eyebrow: "Nuestros Servicios", title: "Detailing Profesional", highlight: "a Domicilio", text: "Desde un lavado exterior hasta la restauración completa de la pintura. Elige el servicio que tu vehículo necesita y nosotros vamos a ti." },
     catalog: { eyebrow: "Catálogo", title: "Todos los", highlight: "Servicios", lead: "Cada servicio se realiza en tu ubicación con productos profesionales, nuestra propia agua filtrada y nuestra propia energía." },
     interior: {
       eyebrow: "Interior", before: "Una cabina limpia,", highlight: "fresca", after: "y protegida",
-      items: [["Aspirado profundo", "de asientos, alfombras, cajuela y rincones."], ["Shampoo y extracción", "de manchas en tela y alfombra."], ["Limpieza y acondicionado", "de piel, vinil y plásticos."], ["Tratamiento de olores", "para un interior fresco."]],
+      items: [["Aspirado profundo", "de asientos, alfombras, cajuela y rincones."], ["Shampoo y extracción", "de manchas en tela y alfombra."], ["Limpieza y acondicionado de asientos de piel", "en vehículos con asientos de piel."], ["Limpieza de portavasos", "además de superficies de vinil y plástico."], ["Tratamiento de ozono interior", "disponible para olores a cigarro, marihuana y otros olores desagradables."], ["Tratamiento de olores", "para un interior fresco."]],
       cta: "Reservar Interior", alt: "Interior de vehículo detallado",
     },
     paint: {
@@ -137,12 +140,13 @@ const es: Dict = {
     compare: {
       eyebrow: "Compara", title: "¿Qué incluye", highlight: "cada paquete?",
       cols: ["Incluye", "Limpieza Básica", "Detailing Completo con Shampoo", "Restauración"],
-      rows: ["Lavado exterior a mano", "Aspirado interior", "Shampoo de asientos y alfombras", "Tratamiento de olores", "Pulido a máquina", "Sellado protector"],
+      rows: ["Lavado exterior a mano", "Aspirado interior", "Shampoo de asientos y alfombras", "Tratamiento de olores", "Pulido a máquina", "Sellado protector", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel (si aplica)"],
     },
     faq: {
       eyebrow: "Preguntas", title: "Preguntas", highlight: "Frecuentes",
       items: [
         ["¿Necesito tener agua o electricidad?", "No. Traemos nuestra propia agua filtrada/destilada, que ayuda a prevenir manchas de agua, y nuestra propia fuente de energía. No necesitas manguera ni enchufe."],
+        ["¿Pueden eliminar olor a humo y otros olores fuertes?", "Sí. Nuestro tratamiento de ozono interior elimina olores a cigarro, marihuana y otros olores desagradables."],
         ["¿Cuánto tiempo toma el servicio?", "Depende del servicio, el tamaño y la condición del vehículo. Te damos un tiempo estimado al confirmar tu cita."],
         ["¿A qué zonas dan servicio?", "Somos un servicio móvil. Escríbenos tu zona en el formulario de reserva y confirmamos disponibilidad."],
         ["¿Por qué el precio puede variar?", "El precio final depende del tamaño del vehículo (sedán, SUV, camioneta) y de su condición. Siempre te confirmamos el precio antes de empezar."],

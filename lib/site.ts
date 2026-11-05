@@ -55,7 +55,7 @@ export const img = (key: ImgKey, w = 1200) =>
 export const VETERAN_DISCOUNT = 15;
 export const veteranPrice = (price: number) => Math.round(price * (100 - VETERAN_DISCOUNT)) / 100;
 
-export type ServiceId = "limpieza" | "profunda" | "pintura" | "exterior" | "interior" | "completo" | "pulido" | "llantas" | "tapiceria";
+export type ServiceId = "limpieza" | "profunda" | "pintura" | "exterior" | "interior" | "completo" | "pulido" | "llantas" | "tapiceria" | "piel" | "molduras" | "ozono";
 
 // price: null = "Get a Quote"; regular = crossed-out original price; home = shown on the homepage
 export const SERVICE_DATA: {
@@ -70,6 +70,9 @@ export const SERVICE_DATA: {
   { id: "pulido", price: null, icon: "polisher", img: "glossGray" },
   { id: "llantas", price: null, icon: "wheel", img: "wheel" },
   { id: "tapiceria", price: null, icon: "drops", img: "tire" },
+  { id: "piel", price: null, icon: "seat", img: "interior" },
+  { id: "molduras", price: null, icon: "car", img: "glossBlack" },
+  { id: "ozono", price: null, icon: "wind", img: "interior" },
 ];
 
 // Pricing cards (text in the dictionaries under `pricing.<service>`)
