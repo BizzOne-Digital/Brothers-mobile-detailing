@@ -18,7 +18,7 @@ const en = {
     priceNote: "Prices may vary depending on the size and condition of the vehicle.",
     mostPopular: "Most popular", specialPrice: "Special price",
     veteran: "off for military veterans:", discount: "discount",
-    included: "Included", notIncluded: "Not included", stars: "5 out of 5 stars",
+    included: "Included", notIncluded: "Not included", stars: "5 out of 5 stars", addon: "Add-on",
   },
   /* Filtered water + own power — shown across the site */
   selfSufficient: {
@@ -110,18 +110,18 @@ const en = {
     profunda: { name: "Deep Cleaning", short: "Removes dirt, stains and odors.", features: ["Carpet & seat shampoo", "Stain removal", "Odor treatment", "Vents & crevices detailed"] },
     pintura: { name: "Paint Restoration", short: "Brings back the original shine and look.", features: ["Paint decontamination", "Light scratch correction", "Machine polishing", "Sealant & protection"] },
     exterior: { name: "Exterior Wash", short: "Foam hand wash with a streak-free dry.", features: ["Foam pre-wash", "Two-bucket hand wash", "Spot-free rinse with filtered water", "Wheels & tires"] },
-    interior: { name: "Interior Detailing", short: "A clean, fresh and protected cabin.", features: ["Deep vacuum", "Plastic & vinyl cleaning", "Cup holder cleaning", "Leather seat cleaning & conditioning (if equipped)", "Interior glass"] },
-    completo: { name: "Full Detail with Shampoo", short: "Interior and exterior at the highest level, with shampoo.", features: ["Full exterior wash", "Full interior detail", "Seat & carpet shampoo", "Cup holder cleaning", "Leather seat cleaning & conditioning (if equipped)", "Tire finish"] },
+    interior: { name: "Interior Detailing", short: "A clean, fresh and protected cabin.", features: ["Deep vacuum", "Plastic & vinyl cleaning", "Cup holder cleaning", "Optional: leather seat cleaning & conditioning (+$30)", "Interior glass"] },
+    completo: { name: "Full Detail with Shampoo", short: "Interior and exterior at the highest level, with shampoo.", features: ["Full exterior wash", "Full interior detail", "Seat & carpet shampoo", "Cup holder cleaning", "Leather seat cleaning & conditioning included (if equipped)", "Tire finish"] },
     pulido: { name: "Paint Polishing", short: "Deep, mirror-like shine.", features: ["Single or multi-stage polish", "Removes dullness and marks", "Enhances color", "Protective finish"] },
     llantas: { name: "Wheels & Tires", short: "Shiny rims and renewed tires.", features: ["Rim decontamination", "Wheel well cleaning", "Tire shine", "Lug nut detail"] },
     tapiceria: { name: "Upholstery Cleaning", short: "Seats and carpets like new.", features: ["Shampoo & extraction", "Fabric, leather or vinyl", "Stain removal", "Quick drying"] },
-    piel: { name: "Leather Seat Cleaning & Conditioning", short: "Cleans, nourishes and protects leather seats.", features: ["Gentle leather cleaning", "Conditioning treatment", "Included with Interior Detailing and Full Detail on vehicles with leather seats"] },
+    piel: { name: "Leather Seat Cleaning & Conditioning", short: "Cleans, nourishes and protects leather seats.", features: ["Gentle leather cleaning", "Conditioning treatment", "Included in Full Detail with Shampoo", "Optional add-on with any other service: +$30"] },
     molduras: { name: "Trim Restoration", short: "Brings faded exterior trim back to life.", features: ["Trim cleaning and prep", "Restores faded plastic and rubber", "Richer, darker finish"] },
     ozono: { name: "Interior Ozone Treatment", short: "Eliminates odors from cigarettes, marijuana and other unpleasant smells.", features: ["Targets cigarette and marijuana odors", "Treats other unpleasant smells", "Treats the full cabin"] },
   },
   pricing: {
-    limpieza: { name: "Basic Wash", desc: "Ideal for regular maintenance of your vehicle.", features: ["Exterior hand wash", "Interior vacuum", "Window cleaning", "Wheels & tires"] },
-    completo: { name: "Full Detail with Shampoo", desc: "Deep interior and exterior cleaning, with shampoo.", features: ["Everything in Basic Wash", "Seat & carpet shampoo", "Cup holder cleaning", "Leather seat cleaning & conditioning (if equipped)", "Odor treatment", "Paint protection"] },
+    limpieza: { name: "Basic Wash", desc: "Ideal for regular maintenance of your vehicle.", features: ["Exterior hand wash", "Interior vacuum", "Window cleaning", "Wheels & tires", "Optional: leather seat care (+$30)"] },
+    completo: { name: "Full Detail with Shampoo", desc: "Deep interior and exterior cleaning, with shampoo.", features: ["Everything in Basic Wash", "Seat & carpet shampoo", "Cup holder cleaning", "Leather seat cleaning & conditioning included (if equipped)", "Odor treatment", "Paint protection"] },
     pintura: { name: "Paint Restoration", desc: "Bring back your paint's original shine.", features: ["Paint assessment", "Decontamination", "Machine polishing", "Protective sealant"] },
   },
   servicesPage: {
@@ -130,7 +130,7 @@ const en = {
     catalog: { eyebrow: "Catalog", title: "All", highlight: "Services", lead: "Every service is done at your location with professional products, our own filtered water and our own power." },
     interior: {
       eyebrow: "Interior", before: "A clean,", highlight: "fresh", after: "and protected cabin",
-      items: [["Deep vacuum", "of seats, carpets, trunk and corners."], ["Shampoo & extraction", "of stains on fabric and carpet."], ["Leather seat cleaning & conditioning", "on vehicles with leather seats."], ["Cup holder cleaning", "plus vinyl and plastic surfaces."], ["Interior ozone treatment", "available for cigarette, marijuana and other unpleasant odors."], ["Odor treatment", "for a fresh interior."]],
+      items: [["Deep vacuum", "of seats, carpets, trunk and corners."], ["Shampoo & extraction", "of stains on fabric and carpet."], ["Leather seat cleaning & conditioning", "included in Full Detail with Shampoo, optional (+$30) with other services."], ["Cup holder cleaning", "plus vinyl and plastic surfaces."], ["Interior ozone treatment", "available for cigarette, marijuana and other unpleasant odors."], ["Odor treatment", "for a fresh interior."]],
       cta: "Book Interior", alt: "Detailed vehicle interior",
     },
     paint: {
@@ -141,7 +141,7 @@ const en = {
     compare: {
       eyebrow: "Compare", title: "What does", highlight: "each package include?",
       cols: ["Includes", "Basic Wash", "Full Detail with Shampoo", "Restoration"],
-      rows: ["Exterior hand wash", "Interior vacuum", "Seat & carpet shampoo", "Odor treatment", "Machine polishing", "Protective sealant", "Cup holder cleaning", "Leather seat cleaning & conditioning (if equipped)"],
+      rows: ["Exterior hand wash", "Interior vacuum", "Seat & carpet shampoo", "Odor treatment", "Machine polishing", "Protective sealant"],
     },
     faq: {
       eyebrow: "Questions", title: "Frequently Asked", highlight: "Questions",
@@ -238,8 +238,8 @@ const en = {
     selfNote: "No need to provide water or an outlet: we bring our own filtered water and power supply.",
     done: { title: "Request received!", text: "Thanks for choosing Brothers Mobile Detailing. We'll contact you soon to confirm your appointment. If it's urgent, call us at", or: "or", back: "Back to Home" },
     nav: { back: "Back", next: "Continue", confirm: "Confirm Booking" },
-    summary: { service: "Service", price: "Price", vehicle: "Vehicle", date: "Date", time: "Time", name: "Name", phone: "Phone", email: "Email", address: "Address", notes: "Notes", promo: "Promotion", veteran: "Military veterans" },
-    byQuote: "By quote", promoValue: "Special Offer",
+    summary: { service: "Service", price: "Price", vehicle: "Vehicle", date: "Date", time: "Time", name: "Name", phone: "Phone", email: "Email", address: "Address", notes: "Notes", promo: "Promotion", veteran: "Military veterans", addon: "Optional add-on" },
+    byQuote: "By quote", addon: "Optional add-on", addonText: "Leather seat cleaning & conditioning", promoValue: "Special Offer",
   },
   footer: {
     about: "Professional mobile detailing. We bring the care your vehicle needs to your home or office, with quality products, our own filtered water and our own power.",

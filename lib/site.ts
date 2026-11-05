@@ -55,11 +55,15 @@ export const img = (key: ImgKey, w = 1200) =>
 export const VETERAN_DISCOUNT = 15;
 export const veteranPrice = (price: number) => Math.round(price * (100 - VETERAN_DISCOUNT)) / 100;
 
+/** Leather seat cleaning & conditioning: included in Full Detail with Shampoo, optional add-on for other services */
+export const LEATHER_ADDON = 30;
+export const ADDON_EXCLUDED: string[] = ["completo", "piel"];
+
 export type ServiceId = "limpieza" | "profunda" | "pintura" | "exterior" | "interior" | "completo" | "pulido" | "llantas" | "tapiceria" | "piel" | "molduras" | "ozono";
 
 // price: null = "Get a Quote"; regular = crossed-out original price; home = shown on the homepage
 export const SERVICE_DATA: {
-  id: ServiceId; price: number | null; regular?: number; veteran?: boolean; icon: IconName; img: ImgKey; home?: boolean;
+  id: ServiceId; price: number | null; regular?: number; veteran?: boolean; addon?: number; icon: IconName; img: ImgKey; home?: boolean;
 }[] = [
   { id: "limpieza", price: 150, veteran: true, icon: "seat", img: "interior", home: true },
   { id: "profunda", price: null, icon: "drops", img: "handWash", home: true },
@@ -70,7 +74,7 @@ export const SERVICE_DATA: {
   { id: "pulido", price: null, icon: "polisher", img: "glossGray" },
   { id: "llantas", price: null, icon: "wheel", img: "wheel" },
   { id: "tapiceria", price: null, icon: "drops", img: "tire" },
-  { id: "piel", price: null, icon: "seat", img: "interior" },
+  { id: "piel", price: null, addon: LEATHER_ADDON, icon: "seat", img: "interior" },
   { id: "molduras", price: null, icon: "car", img: "glossBlack" },
   { id: "ozono", price: null, icon: "wind", img: "interior" },
 ];

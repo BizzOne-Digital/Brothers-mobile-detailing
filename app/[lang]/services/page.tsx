@@ -9,8 +9,9 @@ import { getDict, localizedServices } from "@/lib/i18n";
 import { href } from "@/lib/i18n/config";
 
 // Which package includes each comparison row: [Basic, Full Detail, Restoration]
-const COMPARE: [boolean, boolean, boolean][] = [
-  [true, true, true], [true, true, false], [false, true, false], [false, true, false], [false, false, true], [false, true, true], [false, true, false], [false, true, false],
+// true = included, false = not included, string = optional extra (e.g. "+$30")
+const COMPARE: (boolean | string)[][] = [
+  [true, true, true], [true, true, false], [false, true, false], [false, true, false], [false, false, true], [false, true, true], [false, true, false], ["+$30", true, "+$30"],
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -73,7 +74,7 @@ export default async function ServicesPage() {
                   <tr key={label}>
                     <td>{label}</td>
                     {COMPARE[r].map((yes, i) => (
-                      <td key={i}>{yes ? <Icon name="check" /> : <Icon name="close" className="no" />}<span className="sr-only">{yes ? t.common.included : t.common.notIncluded}</span></td>
+                      <td key={i}>{typeof yes === "string" ? <strong className="text-red">{yes}</strong> : <>{yes ? <Icon name="check" /> : <Icon name="close" className="no" />}<span className="sr-only">{yes ? t.common.included : t.common.notIncluded}</span></>}</td>
                     ))}
                   </tr>
                 ))}

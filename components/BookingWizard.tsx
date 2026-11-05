@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import Field from "./Field";
 import Icon from "./Icon";
-import { SERVICE_DATA, SITE, TIMES, VEHICLE_ICONS, VETERAN_DISCOUNT, veteranPrice } from "@/lib/site";
+import { ADDON_EXCLUDED, LEATHER_ADDON, SERVICE_DATA, SITE, TIMES, VEHICLE_ICONS, VETERAN_DISCOUNT, veteranPrice } from "@/lib/site";
 import type { Dict } from "@/lib/i18n/en";
 import { href, type Locale } from "@/lib/i18n/config";
 import { validate, validateAll, type Rule } from "@/lib/validation";
@@ -27,6 +27,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const minDate = useToday();
   const [step, setStep] = useState(1);
   const [stepError, setStepError] = useState(false);
+  const [addon, setAddon] = useState(false);
   const [sending, setSending] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof Data, Rule | "">>>({});
   const [d, setD] = useState<Data>({
@@ -77,6 +78,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     [s.service, svc ? t.services[svc.id].name : ""],
     [s.price, svc?.price != null ? `${svc.regular ? `$${svc.regular} → ` : `${t.common.from} `}$${svc.price}` : b.byQuote],
     ...(svc?.veteran && svc.price != null ? [[s.veteran, `${VETERAN_DISCOUNT}% ${t.common.discount}: $${veteranPrice(svc.price).toFixed(2)}`] as [string, string]] : []),
+    ...(addon && svc && !ADDON_EXCLUDED.includes(svc.id) ? [[s.addon, `${b.addonText} +$${LEATHER_ADDON}`] as [string, string]] : []),
     [s.vehicle, d.vehicle],
     [s.date, d.date ? new Date(d.date + "T12:00").toLocaleDateString(t.dateLocale, { weekday: "long", day: "numeric", month: "long", year: "numeric" }) : ""],
     [s.time, d.time],
@@ -116,10 +118,17 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
               <div className="option" key={sv.id}>
                 <input type="radio" name="service" id={`s-${sv.id}`} checked={d.service === sv.id} onChange={() => set("service", sv.id)} />
                 <label htmlFor={`s-${sv.id}`}><Icon name={sv.icon} /><strong>{t.services[sv.id].name}</strong>
-                  <small>{sv.price != null ? `${sv.regular ? `$${sv.regular} → ` : `${t.common.from} `}$${sv.price}` : t.common.quote}</small></label>
+                  <small>{sv.addon ? `${t.common.addon} +$${sv.addon}` : sv.price != null ? `${sv.regular ? `$${sv.regular} → ` : `${t.common.from} `}$${sv.price}` : t.common.quote}</small></label>
               </div>
             ))}
           </div>
+          {d.service && !ADDON_EXCLUDED.includes(d.service) && (
+            <label className="addon-check">
+              <input type="checkbox" checked={addon} onChange={(e) => setAddon(e.target.checked)} />
+              <span><small>{b.addon}</small><strong>{b.addonText}</strong></span>
+              <em>+${LEATHER_ADDON}</em>
+            </label>
+          )}
           {renderStepError(b.s1.err)}
         </div>
       )}

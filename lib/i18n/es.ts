@@ -19,7 +19,7 @@ const es: Dict = {
     priceNote: "Los precios pueden variar dependiendo del tamaño y condición del vehículo.",
     mostPopular: "Más popular", specialPrice: "Precio especial",
     veteran: "para veteranos militares:", discount: "de descuento",
-    included: "Incluido", notIncluded: "No incluido", stars: "5 de 5 estrellas",
+    included: "Incluido", notIncluded: "No incluido", stars: "5 de 5 estrellas", addon: "Extra",
   },
   selfSufficient: {
     eyebrow: "Totalmente equipados",
@@ -109,18 +109,18 @@ const es: Dict = {
     profunda: { name: "Limpieza Profunda", short: "Elimina suciedad, manchas y olores.", features: ["Shampoo de alfombras y asientos", "Eliminación de manchas", "Tratamiento de olores", "Detalle de rincones y rejillas"] },
     pintura: { name: "Restauración de Pintura", short: "Recupera el brillo y la apariencia original.", features: ["Descontaminación de pintura", "Corrección de rayones leves", "Pulido a máquina", "Sellado y protección"] },
     exterior: { name: "Lavado Exterior", short: "Lavado a mano con espuma y secado sin rayas.", features: ["Prelavado con espuma", "Lavado a mano, método de dos cubetas", "Enjuague sin manchas con agua filtrada", "Llantas y rines"] },
-    interior: { name: "Detallado Interior", short: "Cabina limpia, fresca y protegida.", features: ["Aspirado profundo", "Limpieza de plásticos y vinil", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel (si aplica)", "Vidrios interiores"] },
-    completo: { name: "Detailing Completo con Shampoo", short: "Interior y exterior al máximo nivel, con shampoo.", features: ["Todo el lavado exterior", "Todo el detallado interior", "Shampoo de asientos y alfombras", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel (si aplica)", "Acabado de llantas"] },
+    interior: { name: "Detallado Interior", short: "Cabina limpia, fresca y protegida.", features: ["Aspirado profundo", "Limpieza de plásticos y vinil", "Limpieza de portavasos", "Opcional: limpieza y acondicionado de asientos de piel (+$30)", "Vidrios interiores"] },
+    completo: { name: "Detailing Completo con Shampoo", short: "Interior y exterior al máximo nivel, con shampoo.", features: ["Todo el lavado exterior", "Todo el detallado interior", "Shampoo de asientos y alfombras", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel incluido (si aplica)", "Acabado de llantas"] },
     pulido: { name: "Pulido de Pintura", short: "Brillo profundo tipo espejo.", features: ["Pulido de una o varias etapas", "Elimina opacidad y marcas", "Realza el color", "Acabado con protección"] },
     llantas: { name: "Llantas y Rines", short: "Rines brillantes y llantas renovadas.", features: ["Descontaminación de rines", "Limpieza de pasos de rueda", "Abrillantador de llantas", "Detalle de birlos"] },
     tapiceria: { name: "Limpieza de Tapicería", short: "Asientos y alfombras como nuevos.", features: ["Shampoo y extracción", "Tela, piel o vinil", "Eliminación de manchas", "Secado rápido"] },
-    piel: { name: "Limpieza y Acondicionado de Piel", short: "Limpia, nutre y protege los asientos de piel.", features: ["Limpieza suave de la piel", "Tratamiento acondicionador", "Incluido en Detallado Interior y Detailing Completo en vehículos con asientos de piel"] },
+    piel: { name: "Limpieza y Acondicionado de Piel", short: "Limpia, nutre y protege los asientos de piel.", features: ["Limpieza suave de la piel", "Tratamiento acondicionador", "Incluido en Detailing Completo con Shampoo", "Extra opcional con cualquier otro servicio: +$30"] },
     molduras: { name: "Restauración de Molduras", short: "Devuelve la vida a las molduras exteriores descoloridas.", features: ["Limpieza y preparación de molduras", "Restaura plástico y hule descolorido", "Acabado más oscuro e intenso"] },
     ozono: { name: "Tratamiento de Ozono Interior", short: "Elimina olores a cigarro, marihuana y otros olores desagradables.", features: ["Para olores a cigarro y marihuana", "Trata otros olores desagradables", "Trata toda la cabina"] },
   },
   pricing: {
-    limpieza: { name: "Limpieza Básica", desc: "Ideal para el mantenimiento regular de tu vehículo.", features: ["Lavado exterior a mano", "Aspirado interior", "Limpieza de vidrios", "Llantas y rines"] },
-    completo: { name: "Detailing Completo con Shampoo", desc: "Limpieza profunda interior y exterior, con shampoo.", features: ["Todo lo de Limpieza Básica", "Shampoo de asientos y alfombras", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel (si aplica)", "Tratamiento de olores", "Protección de pintura"] },
+    limpieza: { name: "Limpieza Básica", desc: "Ideal para el mantenimiento regular de tu vehículo.", features: ["Lavado exterior a mano", "Aspirado interior", "Limpieza de vidrios", "Llantas y rines", "Opcional: cuidado de asientos de piel (+$30)"] },
+    completo: { name: "Detailing Completo con Shampoo", desc: "Limpieza profunda interior y exterior, con shampoo.", features: ["Todo lo de Limpieza Básica", "Shampoo de asientos y alfombras", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel incluido (si aplica)", "Tratamiento de olores", "Protección de pintura"] },
     pintura: { name: "Restauración de Pintura", desc: "Recupera el brillo original de tu pintura.", features: ["Evaluación de la pintura", "Descontaminación", "Pulido a máquina", "Sellado protector"] },
   },
   servicesPage: {
@@ -129,7 +129,7 @@ const es: Dict = {
     catalog: { eyebrow: "Catálogo", title: "Todos los", highlight: "Servicios", lead: "Cada servicio se realiza en tu ubicación con productos profesionales, nuestra propia agua filtrada y nuestra propia energía." },
     interior: {
       eyebrow: "Interior", before: "Una cabina limpia,", highlight: "fresca", after: "y protegida",
-      items: [["Aspirado profundo", "de asientos, alfombras, cajuela y rincones."], ["Shampoo y extracción", "de manchas en tela y alfombra."], ["Limpieza y acondicionado de asientos de piel", "en vehículos con asientos de piel."], ["Limpieza de portavasos", "además de superficies de vinil y plástico."], ["Tratamiento de ozono interior", "disponible para olores a cigarro, marihuana y otros olores desagradables."], ["Tratamiento de olores", "para un interior fresco."]],
+      items: [["Aspirado profundo", "de asientos, alfombras, cajuela y rincones."], ["Shampoo y extracción", "de manchas en tela y alfombra."], ["Limpieza y acondicionado de asientos de piel", "incluido en Detailing Completo con Shampoo, opcional (+$30) con otros servicios."], ["Limpieza de portavasos", "además de superficies de vinil y plástico."], ["Tratamiento de ozono interior", "disponible para olores a cigarro, marihuana y otros olores desagradables."], ["Tratamiento de olores", "para un interior fresco."]],
       cta: "Reservar Interior", alt: "Interior de vehículo detallado",
     },
     paint: {
@@ -140,7 +140,7 @@ const es: Dict = {
     compare: {
       eyebrow: "Compara", title: "¿Qué incluye", highlight: "cada paquete?",
       cols: ["Incluye", "Limpieza Básica", "Detailing Completo con Shampoo", "Restauración"],
-      rows: ["Lavado exterior a mano", "Aspirado interior", "Shampoo de asientos y alfombras", "Tratamiento de olores", "Pulido a máquina", "Sellado protector", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel (si aplica)"],
+      rows: ["Lavado exterior a mano", "Aspirado interior", "Shampoo de asientos y alfombras", "Tratamiento de olores", "Pulido a máquina", "Sellado protector"],
     },
     faq: {
       eyebrow: "Preguntas", title: "Preguntas", highlight: "Frecuentes",
@@ -237,8 +237,8 @@ const es: Dict = {
     selfNote: "No necesitas darnos agua ni enchufe: traemos nuestra propia agua filtrada y fuente de energía.",
     done: { title: "¡Solicitud recibida!", text: "Gracias por elegir Brothers Mobile Detailing. Te contactaremos pronto para confirmar tu cita. Si es urgente, llámanos al", or: "o al", back: "Volver al Inicio" },
     nav: { back: "Atrás", next: "Continuar", confirm: "Confirmar Reserva" },
-    summary: { service: "Servicio", price: "Precio", vehicle: "Vehículo", date: "Fecha", time: "Hora", name: "Nombre", phone: "Teléfono", email: "Email", address: "Dirección", notes: "Notas", promo: "Promoción", veteran: "Veteranos militares" },
-    byQuote: "Por cotizar", promoValue: "Oferta Especial",
+    summary: { service: "Servicio", price: "Precio", vehicle: "Vehículo", date: "Fecha", time: "Hora", name: "Nombre", phone: "Teléfono", email: "Email", address: "Dirección", notes: "Notas", promo: "Promoción", veteran: "Veteranos militares", addon: "Extra opcional" },
+    byQuote: "Por cotizar", addon: "Extra opcional", addonText: "Limpieza y acondicionado de asientos de piel", promoValue: "Oferta Especial",
   },
   footer: {
     about: "Detailing profesional a domicilio. Llevamos el cuidado de tu vehículo hasta tu casa u oficina, con productos de calidad, nuestra propia agua filtrada y nuestra propia energía.",
