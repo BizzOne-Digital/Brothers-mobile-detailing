@@ -38,7 +38,7 @@ const es: Dict = {
       ctaServices: "Ver Servicios",
     },
     badges: { from: "Servicios desde", mobileSmall: "Vamos a ti", mobileBig: "A Domicilio", waterSmall: "Autosuficientes", waterBig: "Agua + Energía" },
-    highlight: [["Limpieza de Carros", "Interiores y Exteriores"], ["Limpieza Profunda", "Detailing Completo"], ["Restauración de Pintura", "Brillo y Protección Duradera"]],
+    highlight: [["Limpieza de Carros", "Interiores y Exteriores"], ["Limpieza Profunda", "Detailing Completo"], ["Restauración de Pintura y Motor", "Clay Bar, Pulido y Motor"]],
     services: { title: "Nuestros", highlight: "Servicios", lead: "Cuidado profesional para tu vehículo, con la comodidad de nuestro servicio a domicilio.", cta: "Ver Todos los Servicios" },
     why: {
       eyebrow: "Por qué nosotros", title: "¿Por qué elegir", highlight: "Brothers Mobile Detailing?",
@@ -107,7 +107,7 @@ const es: Dict = {
   services: {
     limpieza: { name: "Limpieza de Carros", short: "Interior y exterior impecable.", features: ["Lavado exterior a mano", "Aspirado completo", "Limpieza de tablero y paneles", "Vidrios sin manchas"] },
     profunda: { name: "Limpieza Profunda", short: "Elimina suciedad, manchas y olores.", features: ["Shampoo de alfombras y asientos", "Eliminación de manchas", "Tratamiento de olores", "Detalle de rincones y rejillas"] },
-    pintura: { name: "Restauración de Pintura", short: "Recupera el brillo y la apariencia original.", features: ["Descontaminación de pintura", "Corrección de rayones leves", "Pulido a máquina", "Sellado y protección"] },
+    pintura: { name: "Restauración de Pintura y Limpieza de Motor", short: "Descontaminación con clay bar, pulido y restauración del motor.", features: ["Descontaminación de pintura con clay bar antes de encerar o pulir", "Pulido a máquina y cera", "Lavado y restauración del motor, protegiendo los componentes eléctricos", "Servicio completo: lavado por arriba, por debajo y del motor", "Trabajo de motor solo con tu autorización, según su condición"] },
     exterior: { name: "Lavado Exterior", short: "Lavado a mano con espuma y secado sin rayas.", features: ["Prelavado con espuma", "Lavado a mano, método de dos cubetas", "Enjuague sin manchas con agua filtrada", "Llantas y rines"] },
     interior: { name: "Detallado Interior", short: "Cabina limpia, fresca y protegida.", features: ["Aspirado profundo", "Limpieza de plásticos y vinil", "Limpieza de portavasos", "Opcional: limpieza y acondicionado de asientos de piel (+$30)", "Vidrios interiores"] },
     completo: { name: "Detailing Completo con Shampoo", short: "Interior y exterior al máximo nivel, con shampoo.", features: ["Todo el lavado exterior", "Todo el detallado interior", "Shampoo de asientos y alfombras", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel incluido (si aplica)", "Acabado de llantas"] },
@@ -121,7 +121,7 @@ const es: Dict = {
   pricing: {
     limpieza: { name: "Limpieza Básica", desc: "Ideal para el mantenimiento regular de tu vehículo.", features: ["Lavado exterior a mano", "Aspirado interior", "Limpieza de vidrios", "Llantas y rines", "Opcional: cuidado de asientos de piel (+$30)"] },
     completo: { name: "Detailing Completo con Shampoo", desc: "Limpieza profunda interior y exterior, con shampoo.", features: ["Todo lo de Limpieza Básica", "Shampoo de asientos y alfombras", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel incluido (si aplica)", "Tratamiento de olores", "Protección de pintura"] },
-    pintura: { name: "Restauración de Pintura", desc: "Recupera el brillo original de tu pintura.", features: ["Evaluación de la pintura", "Descontaminación", "Pulido a máquina", "Sellado protector"] },
+    pintura: { name: "Restauración de Pintura y Limpieza de Motor", desc: "Clay bar, pulido y restauración del motor. El precio depende de la condición del vehículo.", features: ["Descontaminación de pintura con clay bar", "Pulido a máquina y cera", "Lavado y restauración del motor", "Componentes eléctricos protegidos", "Servicio completo: por arriba, por debajo y motor", "Trabajo de motor con tu autorización"] },
   },
   servicesPage: {
     meta: { title: "Servicios", description: "Lavado exterior, detallado interior, detailing completo con shampoo, acondicionado de piel, tratamiento de ozono, restauración de molduras y pintura, llantas y tapicería. A domicilio." },
@@ -133,19 +133,20 @@ const es: Dict = {
       cta: "Reservar Interior", alt: "Interior de vehículo detallado",
     },
     paint: {
-      eyebrow: "Pintura", before: "Recupera el", highlight: "brillo", after: "original",
-      items: [["Evaluación", "del estado de la pintura antes de empezar."], ["Descontaminación", "para remover residuos adheridos."], ["Pulido a máquina", "para reducir marcas y opacidad."], ["Sellado protector", "para un brillo más duradero."]],
-      cta: "Solicitar Cotización", alt: "Pintura pulida con brillo profundo",
+      eyebrow: "Pintura y Motor", before: "Recupera el", highlight: "brillo", after: "por dentro y por fuera",
+      items: [["Descontaminación con clay bar", "de la pintura antes de encerar o pulir."], ["Pulido a máquina y cera", "para reducir marcas y devolver un brillo profundo."], ["Lavado y restauración del motor", "protegiendo cuidadosamente los componentes eléctricos."], ["Servicio completo", "lavado por arriba, por debajo del vehículo y del motor."], ["Con tu autorización", "la limpieza del motor depende de su condición y solo la hacemos con tu aprobación."], ["Sin prisa, bien hecho", "el servicio no se limita a un plazo de 24–48 horas. Nuestra meta es que quedes totalmente satisfecho con el resultado."]],
+      cta: "Reservar Pintura y Motor", alt: "Pintura pulida con brillo profundo",
     },
     compare: {
       eyebrow: "Compara", title: "¿Qué incluye", highlight: "cada paquete?",
-      cols: ["Incluye", "Limpieza Básica", "Detailing Completo con Shampoo", "Restauración"],
-      rows: ["Lavado exterior a mano", "Aspirado interior", "Shampoo de asientos y alfombras", "Tratamiento de olores", "Pulido a máquina", "Sellado protector"],
+      cols: ["Incluye", "Limpieza Básica", "Detailing Completo con Shampoo", "Pintura y Motor"],
+      rows: ["Lavado exterior a mano", "Aspirado interior", "Shampoo de asientos y alfombras", "Tratamiento de olores", "Pulido a máquina", "Sellado protector", "Limpieza de portavasos", "Limpieza y acondicionado de asientos de piel (si aplica)", "Descontaminación con clay bar", "Lavado y restauración del motor"],
     },
     faq: {
       eyebrow: "Preguntas", title: "Preguntas", highlight: "Frecuentes",
       items: [
         ["¿Necesito tener agua o electricidad?", "No. Traemos nuestra propia agua filtrada/destilada, que ayuda a prevenir manchas de agua, y nuestra propia fuente de energía. No necesitas manguera ni enchufe."],
+        ["¿Limpian el motor?", "Sí. Como parte de Restauración de Pintura y Limpieza de Motor, lavamos y restauramos el motor protegiendo cuidadosamente los componentes eléctricos. Solo lo hacemos con tu autorización, según la condición del motor."],
         ["¿Pueden eliminar olor a humo y otros olores fuertes?", "Sí. Nuestro tratamiento de ozono interior elimina olores a cigarro, marihuana y otros olores desagradables."],
         ["¿Cuánto tiempo toma el servicio?", "Depende del servicio, el tamaño y la condición del vehículo. Te damos un tiempo estimado al confirmar tu cita."],
         ["¿A qué zonas dan servicio?", "Somos un servicio móvil. Escríbenos tu zona en el formulario de reserva y confirmamos disponibilidad."],

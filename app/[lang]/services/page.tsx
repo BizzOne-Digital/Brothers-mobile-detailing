@@ -11,7 +11,7 @@ import { href } from "@/lib/i18n/config";
 // Which package includes each comparison row: [Basic, Full Detail, Restoration]
 // true = included, false = not included, string = optional extra (e.g. "+$30")
 const COMPARE: (boolean | string)[][] = [
-  [true, true, true], [true, true, false], [false, true, false], [false, true, false], [false, false, true], [false, true, true], [false, true, false], ["+$30", true, "+$30"],
+  [true, true, true], [true, true, false], [false, true, false], [false, true, false], [false, false, true], [false, true, true], [false, true, false], ["+$30", true, "+$30"], [false, false, true], [false, false, true],
 ];
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -76,7 +76,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
   const s = b.summary;
   const summary: [string, string][] = [
     [s.service, svc ? t.services[svc.id].name : ""],
-    [s.price, svc?.price != null ? `${svc.regular ? `$${svc.regular} → ` : `${t.common.from} `}$${svc.price}` : b.byQuote],
+    [s.price, svc?.price != null ? `${svc.regular ? `$${svc.regular} → ` : `${t.common.from} `}$${svc.price}${svc.priceMax ? `–$${svc.priceMax}` : ""}` : b.byQuote],
     ...(svc?.veteran && svc.price != null ? [[s.veteran, `${VETERAN_DISCOUNT}% ${t.common.discount}: $${veteranPrice(svc.price).toFixed(2)}`] as [string, string]] : []),
     ...(addon && svc && !ADDON_EXCLUDED.includes(svc.id) ? [[s.addon, `${b.addonText} +$${LEATHER_ADDON}`] as [string, string]] : []),
     [s.vehicle, d.vehicle],
@@ -118,7 +118,7 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
               <div className="option" key={sv.id}>
                 <input type="radio" name="service" id={`s-${sv.id}`} checked={d.service === sv.id} onChange={() => set("service", sv.id)} />
                 <label htmlFor={`s-${sv.id}`}><Icon name={sv.icon} /><strong>{t.services[sv.id].name}</strong>
-                  <small>{sv.addon ? `${t.common.addon} +$${sv.addon}` : sv.price != null ? `${sv.regular ? `$${sv.regular} → ` : `${t.common.from} `}$${sv.price}` : t.common.quote}</small></label>
+                  <small>{sv.addon ? `${t.common.addon} +$${sv.addon}` : sv.price != null ? `${sv.regular ? `$${sv.regular} → ` : `${t.common.from} `}$${sv.price}${sv.priceMax ? `–$${sv.priceMax}` : ""}` : t.common.quote}</small></label>
               </div>
             ))}
           </div>

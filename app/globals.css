@@ -608,3 +608,6 @@ textarea.input { min-height: 130px; resize: vertical; }
 .addon-check small { color: var(--red); font-weight: 700; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; }
 .addon-check strong { font-family: var(--font-head); }
 .addon-check em { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--red); }
+
+/* Price ranges ($40–$80) on pricing cards */
+.p-card__price strong.range { font-size: 2.5rem; }

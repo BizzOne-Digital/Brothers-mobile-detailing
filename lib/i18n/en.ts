@@ -38,7 +38,7 @@ const en = {
       ctaServices: "View Services",
     },
     badges: { from: "Services from", mobileSmall: "We come to you", mobileBig: "Mobile Service", waterSmall: "Self-contained", waterBig: "Water + Power" },
-    highlight: [["Car Cleaning", "Interior & Exterior"], ["Deep Cleaning", "Full Detailing"], ["Paint Restoration", "Lasting Shine & Protection"]],
+    highlight: [["Car Cleaning", "Interior & Exterior"], ["Deep Cleaning", "Full Detailing"], ["Paint Restoration & Engine Cleaning", "Clay Bar, Polish & Engine Bay"]],
     services: { title: "Our", highlight: "Services", lead: "Professional care for your vehicle, with the convenience of our mobile service.", cta: "View All Services" },
     why: {
       eyebrow: "Why us", title: "Why choose", highlight: "Brothers Mobile Detailing?",
@@ -108,7 +108,7 @@ const en = {
   services: {
     limpieza: { name: "Car Cleaning", short: "Spotless inside and out.", features: ["Exterior hand wash", "Full vacuum", "Dashboard & panel cleaning", "Streak-free windows"] },
     profunda: { name: "Deep Cleaning", short: "Removes dirt, stains and odors.", features: ["Carpet & seat shampoo", "Stain removal", "Odor treatment", "Vents & crevices detailed"] },
-    pintura: { name: "Paint Restoration", short: "Brings back the original shine and look.", features: ["Paint decontamination", "Light scratch correction", "Machine polishing", "Sealant & protection"] },
+    pintura: { name: "Paint Restoration & Engine Cleaning", short: "Clay bar decontamination, polishing and engine bay restoration.", features: ["Clay bar paint decontamination before waxing or polishing", "Machine polishing & wax", "Engine bay wash & restoration, protecting electrical components", "Complete service: washes the top, underneath and engine", "Engine work only with your authorization, depending on its condition"] },
     exterior: { name: "Exterior Wash", short: "Foam hand wash with a streak-free dry.", features: ["Foam pre-wash", "Two-bucket hand wash", "Spot-free rinse with filtered water", "Wheels & tires"] },
     interior: { name: "Interior Detailing", short: "A clean, fresh and protected cabin.", features: ["Deep vacuum", "Plastic & vinyl cleaning", "Cup holder cleaning", "Optional: leather seat cleaning & conditioning (+$30)", "Interior glass"] },
     completo: { name: "Full Detail with Shampoo", short: "Interior and exterior at the highest level, with shampoo.", features: ["Full exterior wash", "Full interior detail", "Seat & carpet shampoo", "Cup holder cleaning", "Leather seat cleaning & conditioning included (if equipped)", "Tire finish"] },
@@ -122,7 +122,7 @@ const en = {
   pricing: {
     limpieza: { name: "Basic Wash", desc: "Ideal for regular maintenance of your vehicle.", features: ["Exterior hand wash", "Interior vacuum", "Window cleaning", "Wheels & tires", "Optional: leather seat care (+$30)"] },
     completo: { name: "Full Detail with Shampoo", desc: "Deep interior and exterior cleaning, with shampoo.", features: ["Everything in Basic Wash", "Seat & carpet shampoo", "Cup holder cleaning", "Leather seat cleaning & conditioning included (if equipped)", "Odor treatment", "Paint protection"] },
-    pintura: { name: "Paint Restoration", desc: "Bring back your paint's original shine.", features: ["Paint assessment", "Decontamination", "Machine polishing", "Protective sealant"] },
+    pintura: { name: "Paint Restoration & Engine Cleaning", desc: "Clay bar, polish and engine bay restoration. Price depends on the vehicle's condition.", features: ["Clay bar paint decontamination", "Machine polishing & wax", "Engine bay wash & restoration", "Electrical components protected", "Complete service: top, underneath and engine", "Engine work with your authorization"] },
   },
   servicesPage: {
     meta: { title: "Services", description: "Exterior wash, interior detailing, full detail with shampoo, leather conditioning, ozone treatment, trim and paint restoration, wheels and upholstery. Mobile service." },
@@ -134,19 +134,20 @@ const en = {
       cta: "Book Interior", alt: "Detailed vehicle interior",
     },
     paint: {
-      eyebrow: "Paint", before: "Bring back the original", highlight: "shine", after: "",
-      items: [["Assessment", "of the paint condition before we start."], ["Decontamination", "to remove bonded contaminants."], ["Machine polishing", "to reduce marks and dullness."], ["Protective sealant", "for a longer-lasting shine."]],
-      cta: "Request a Quote", alt: "Polished paint with a deep shine",
+      eyebrow: "Paint & Engine", before: "Restore the", highlight: "shine", after: "inside and out",
+      items: [["Clay bar decontamination", "of the paint before any waxing or polishing."], ["Machine polishing & wax", "to reduce marks and bring back a deep shine."], ["Engine bay wash & restoration", "while carefully protecting the electrical components."], ["Complete service", "washes the top, underneath the vehicle and the engine."], ["With your authorization", "engine cleaning depends on its condition, and we only do it with your approval."], ["No rush, done right", "the service isn't limited to a 24–48 hour window. Our goal is that you're fully satisfied with the result."]],
+      cta: "Book Paint & Engine", alt: "Polished paint with a deep shine",
     },
     compare: {
       eyebrow: "Compare", title: "What does", highlight: "each package include?",
-      cols: ["Includes", "Basic Wash", "Full Detail with Shampoo", "Restoration"],
-      rows: ["Exterior hand wash", "Interior vacuum", "Seat & carpet shampoo", "Odor treatment", "Machine polishing", "Protective sealant"],
+      cols: ["Includes", "Basic Wash", "Full Detail with Shampoo", "Paint & Engine"],
+      rows: ["Exterior hand wash", "Interior vacuum", "Seat & carpet shampoo", "Odor treatment", "Machine polishing", "Protective sealant", "Cup holder cleaning", "Leather seat cleaning & conditioning (if equipped)", "Clay bar decontamination", "Engine bay wash & restoration"],
     },
     faq: {
       eyebrow: "Questions", title: "Frequently Asked", highlight: "Questions",
       items: [
         ["Do I need to provide water or electricity?", "No. We bring our own filtered/distilled water, which helps prevent water spots, and our own power supply. You don't need a hose or an outlet."],
+        ["Do you clean the engine?", "Yes. As part of Paint Restoration & Engine Cleaning, we wash and restore the engine bay while carefully protecting the electrical components. We only do it with your authorization, depending on the engine's condition."],
         ["Can you remove smoke and other strong odors?", "Yes. Our interior ozone treatment eliminates odors from cigarettes, marijuana and other unpleasant smells."],
         ["How long does the service take?", "It depends on the service, the size and the condition of the vehicle. We give you an estimated time when we confirm your appointment."],
         ["What areas do you serve?", "We're a mobile service. Enter your area in the booking form and we'll confirm availability."],

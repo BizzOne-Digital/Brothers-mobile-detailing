@@ -63,11 +63,11 @@ export type ServiceId = "limpieza" | "profunda" | "pintura" | "exterior" | "inte
 
 // price: null = "Get a Quote"; regular = crossed-out original price; home = shown on the homepage
 export const SERVICE_DATA: {
-  id: ServiceId; price: number | null; regular?: number; veteran?: boolean; addon?: number; icon: IconName; img: ImgKey; home?: boolean;
+  id: ServiceId; price: number | null; priceMax?: number; regular?: number; veteran?: boolean; addon?: number; icon: IconName; img: ImgKey; home?: boolean;
 }[] = [
   { id: "limpieza", price: 150, veteran: true, icon: "seat", img: "interior", home: true },
   { id: "profunda", price: null, icon: "drops", img: "handWash", home: true },
-  { id: "pintura", price: null, icon: "sparkle", img: "polish", home: true },
+  { id: "pintura", price: 40, priceMax: 80, icon: "sparkle", img: "polish", home: true },
   { id: "exterior", price: null, icon: "car", img: "wheelFoam" },
   { id: "interior", price: null, icon: "seat", img: "interior" },
   { id: "completo", price: 200, regular: 280, icon: "layers", img: "glossBlack" },
@@ -81,11 +81,11 @@ export const SERVICE_DATA: {
 
 // Pricing cards (text in the dictionaries under `pricing.<service>`)
 export const PRICING_DATA: {
-  service: "limpieza" | "completo" | "pintura"; price: number | null; regular?: number; veteran?: boolean; icon: IconName; featured: boolean;
+  service: "limpieza" | "completo" | "pintura"; price: number | null; priceMax?: number; regular?: number; veteran?: boolean; icon: IconName; featured: boolean;
 }[] = [
   { service: "limpieza", price: 150, veteran: true, icon: "car", featured: false },
   { service: "completo", price: 200, regular: 280, icon: "layers", featured: true },
-  { service: "pintura", price: null, icon: "sparkle", featured: false },
+  { service: "pintura", price: 40, priceMax: 80, icon: "sparkle", featured: false },
 ];
 
 export type GalleryCat = "exterior" | "interior" | "pintura" | "antes";

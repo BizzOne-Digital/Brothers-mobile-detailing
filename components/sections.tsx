@@ -72,7 +72,7 @@ export async function ServiceCard({ s, i, detailed }: { s: Service; i: number; d
           {s.addon
             ? <span className="price-tag"><i>{t.common.addon}</i> <b>+${s.addon}</b></span>
             : s.price != null
-            ? <span className="price-tag">{s.regular ? <s>${s.regular}</s> : <i>{t.common.from}</i>} <b>${s.price}</b></span>
+            ? <span className="price-tag">{s.regular ? <s>${s.regular}</s> : <i>{t.common.from}</i>} <b>${s.price}{s.priceMax ? `–$${s.priceMax}` : ""}</b></span>
             : <span className="price-tag price-tag--quote"><b>{t.common.quote}</b></span>}
           <Link href={href(lang, `/book?servicio=${s.id}`)} className="link-arrow" aria-label={`${t.common.book} ${s.name}`}>{t.common.book} <Icon name="arrow" /></Link>
         </div>
@@ -96,7 +96,7 @@ export async function PricingCards() {
             <p className="p-card__desc">{text.desc}</p>
             <div className="p-card__price">
               {p.price != null
-                ? <>{p.regular ? <s>${p.regular}</s> : <small>{t.common.from}</small>}<strong>${p.price}</strong></>
+                ? <>{p.regular ? <s>${p.regular}</s> : <small>{t.common.from}</small>}<strong className={p.priceMax ? "range" : ""}>${p.price}{p.priceMax ? `–$${p.priceMax}` : ""}</strong></>
                 : <strong className="quote">{t.common.requestQuote}</strong>}
             </div>
             {p.veteran && p.price != null && <VeteranNote price={p.price} t={t} />}
