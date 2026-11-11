@@ -108,5 +108,28 @@ export const GALLERY_DATA: { img: ImgKey; cat: GalleryCat; ratio: string }[] = [
 // Vehicle types (labels in the dictionaries, same order)
 export const VEHICLE_ICONS: IconName[] = ["car", "suv", "truck", "suv"];
 
-// Booking time slots — edit to match real availability
-export const TIMES = ["8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM"];
+// Business hours: Monday–Saturday.
+// Fall & winter (standard time, it gets dark earlier): 8 AM–4 PM. Spring & summer (daylight saving time): 8 AM–6 PM.
+export const HOURS = { winter: { open: 8, close: 16 }, summer: { open: 8, close: 18 } };
+export type Season = keyof typeof HOURS;
+
+/** US daylight saving time: 2nd Sunday of March → 1st Sunday of November */
+export function seasonFor(date: Date): Season {
+  const y = date.getFullYear();
+  const nthSunday = (month: number, n: number) => {
+    const d = new Date(y, month, 1);
+    d.setDate(1 + ((7 - d.getDay()) % 7) + (n - 1) * 7);
+    return d;
+  };
+  return date >= nthSunday(2, 2) && date < nthSunday(10, 1) ? "summer" : "winter";
+}
+
+const fmtHour = (h: number) => `${h > 12 ? h - 12 : h}:00 ${h >= 12 ? "PM" : "AM"}`;
+export const hoursLabel = (s: Season) => `${fmtHour(HOURS[s].open)} – ${fmtHour(HOURS[s].close)}`;
+
+/** Bookable start times for a date ("YYYY-MM-DD"); the last slot starts 1 hour before closing */
+export function timeSlots(isoDate: string) {
+  if (!isoDate) return [];
+  const { open, close } = HOURS[seasonFor(new Date(isoDate + "T12:00"))];
+  return Array.from({ length: close - open }, (_, i) => fmtHour(open + i));
+}

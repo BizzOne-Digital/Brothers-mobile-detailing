@@ -3,7 +3,7 @@ import Image from "@/components/Photo";
 import Link from "next/link";
 import Icon, { type IconName } from "./Icon";
 import { Brush } from "./ui";
-import { img, PRICING_DATA, SITE, VETERAN_DISCOUNT, veteranPrice, type ImgKey } from "@/lib/site";
+import { hoursLabel, img, PRICING_DATA, SITE, VETERAN_DISCOUNT, veteranPrice, type ImgKey } from "@/lib/site";
 import { photo } from "@/lib/photo";
 import { getDict, type Dict, type Service } from "@/lib/i18n";
 import { href } from "@/lib/i18n/config";
@@ -41,6 +41,21 @@ export async function CtaBanner({ image = "garage", title, text }: { image?: Img
         </div>
       </div>
     </section>
+  );
+}
+
+/** Business hours (Mon–Sat, seasonal) — footer, contact page, home contact card */
+export async function BusinessHours() {
+  const { t } = await getDict();
+  const h = t.hours;
+  return (
+    <div className="hours">
+      <strong><Icon name="clock" /> {h.title}</strong>
+      <span className="hours__days">{h.days}</span>
+      <span><em>{h.winter}</em> {hoursLabel("winter")}</span>
+      <span><em>{h.summer}</em> {hoursLabel("summer")}</span>
+      <span><em>{h.sunday}</em> {h.closed}</span>
+    </div>
   );
 }
 

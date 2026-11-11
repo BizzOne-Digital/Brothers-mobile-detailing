@@ -611,3 +611,11 @@ textarea.input { min-height: 130px; resize: vertical; }
 
 /* Price ranges ($40–$80) on pricing cards */
 .p-card__price strong.range { font-size: 2.5rem; }
+
+/* Business hours block */
+.hours { display: grid; gap: 4px; margin: 22px 0; padding: 16px 18px; border-radius: 14px; background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .08); font-size: .92rem; position: relative; z-index: 1; }
+.hours strong { display: flex; align-items: center; gap: 8px; color: #fff; font-family: var(--font-head); font-size: 1rem; margin-bottom: 2px; }
+.hours strong svg { width: 18px; height: 18px; color: var(--red); }
+.hours__days { color: #fff; font-weight: 600; }
+.hours em { font-style: normal; color: rgba(255, 255, 255, .55); margin-right: 6px; }
+.hours em::after { content: ":"; }

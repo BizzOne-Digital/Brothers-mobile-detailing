@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import Icon from "@/components/Icon";
 import { Socials } from "@/components/ui";
-import { CtaBanner, PageHero } from "@/components/sections";
+import { BusinessHours, CtaBanner, PageHero } from "@/components/sections";
 import { SITE } from "@/lib/site";
 import { getDict } from "@/lib/i18n";
 
@@ -33,6 +33,7 @@ export default async function ContactPage() {
               <li><div><span className="ic"><Icon name="pin" /></span><span><small>{i.service}</small><strong>{i.serviceValue}</strong></span></div></li>
               <li><div><span className="ic"><Icon name="droplet" /></span><span><small>{t.selfSufficient.eyebrow}</small><strong>{t.selfSufficient.short}</strong></span></div></li>
             </ul>
+            <BusinessHours />
             <Socials />
           </aside>
           <ContactForm t={t} />

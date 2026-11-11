@@ -10,7 +10,7 @@ import { useToday } from "@/lib/useToday";
 type Key = "name" | "phone" | "email" | "area" | "date" | "vehicle" | "service" | "message";
 const SCHEMA: Partial<Record<Key, Rule[]>> = {
   name: ["required", "name"], phone: ["required", "phone"], email: ["required", "email"],
-  area: ["required"], date: ["future"], vehicle: ["required"], service: ["required"],
+  area: ["required"], date: ["future", "workday"], vehicle: ["required"], service: ["required"],
 };
 const EMPTY: Record<Key, string> = { name: "", phone: "", email: "", area: "", date: "", vehicle: "", service: "", message: "" };
 

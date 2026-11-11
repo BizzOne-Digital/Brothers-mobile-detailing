@@ -217,7 +217,7 @@ const en = {
     select: "Select…", other: "Other / Not sure", send: "Send Message", sending: "Sending…",
     errors: {
       required: "This field is required.", name: "Please enter your full name.", email: "Please enter a valid email.",
-      phone: "Please enter a valid phone number (10 digits).", future: "Please choose today or a later date.",
+      phone: "Please enter a valid phone number (10 digits).", future: "Please choose today or a later date.", workday: "We're closed on Sundays. Please choose Monday to Saturday.",
     },
   },
   vehicles: [
@@ -233,7 +233,7 @@ const en = {
     steps: ["Service", "Vehicle", "Date", "Your details", "Confirm"],
     s1: { title: "What service do you need?", text: "You can add extra details later.", err: "Please choose a service to continue." },
     s2: { title: "Vehicle type", text: "The final price may vary depending on size and condition.", err: "Please choose your vehicle type." },
-    s3: { title: "Date and time", text: "Choose the day and time you prefer. We'll confirm availability.", date: "Date", time: "Time", err: "Please choose a valid date and a time." },
+    s3: { title: "Date and time", text: "Choose the day and time you prefer. We'll confirm availability.", date: "Date", time: "Time", err: "Please choose a valid date and a time.", pickDate: "Choose a date to see the available times." },
     s4: { title: "Your details", text: "We only use them to confirm your appointment.", address: "Service address", notes: "Notes (optional)", notesPh: "Vehicle condition, access, pets, etc." },
     s5: { title: "Confirm your booking", text: "Review your details before sending." },
     selfNote: "No need to provide water or an outlet: we bring our own filtered water and power supply.",
@@ -247,6 +247,7 @@ const en = {
     nav: "Navigation", services: "Services", contact: "Contact", book: "Book", mobile: "Mobile service",
     rights: "All rights reserved.", tagline: "Mobile Car Detailing · We Come to You",
   },
+  hours: { title: "Business Hours", days: "Monday – Saturday", winter: "Fall & winter", summer: "Spring & summer", sunday: "Sunday", closed: "Closed" },
   dateLocale: "en-US",
 };
 

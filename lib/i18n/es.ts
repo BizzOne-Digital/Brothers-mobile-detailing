@@ -216,7 +216,7 @@ const es: Dict = {
     select: "Selecciona…", other: "Otro / No estoy seguro", send: "Enviar Mensaje", sending: "Enviando…",
     errors: {
       required: "Este campo es obligatorio.", name: "Ingresa tu nombre completo.", email: "Ingresa un correo válido.",
-      phone: "Ingresa un teléfono válido (10 dígitos).", future: "Elige una fecha a partir de hoy.",
+      phone: "Ingresa un teléfono válido (10 dígitos).", future: "Elige una fecha a partir de hoy.", workday: "Cerramos los domingos. Elige de lunes a sábado.",
     },
   },
   vehicles: [
@@ -232,7 +232,7 @@ const es: Dict = {
     steps: ["Servicio", "Vehículo", "Fecha", "Tus datos", "Confirmar"],
     s1: { title: "¿Qué servicio necesitas?", text: "Puedes agregar detalles adicionales más adelante.", err: "Selecciona un servicio para continuar." },
     s2: { title: "Tipo de vehículo", text: "El precio final puede variar según el tamaño y la condición.", err: "Selecciona el tipo de vehículo." },
-    s3: { title: "Fecha y hora", text: "Elige el día y el horario que prefieras. Te confirmaremos la disponibilidad.", date: "Fecha", time: "Horario", err: "Selecciona una fecha válida y un horario." },
+    s3: { title: "Fecha y hora", text: "Elige el día y el horario que prefieras. Te confirmaremos la disponibilidad.", date: "Fecha", time: "Horario", pickDate: "Elige una fecha para ver los horarios disponibles.", err: "Selecciona una fecha válida y un horario." },
     s4: { title: "Tus datos", text: "Los usamos solo para confirmar tu cita.", address: "Dirección del servicio", notes: "Notas (opcional)", notesPh: "Condición del vehículo, acceso, mascotas, etc." },
     s5: { title: "Confirma tu reserva", text: "Revisa los datos antes de enviar." },
     selfNote: "No necesitas darnos agua ni enchufe: traemos nuestra propia agua filtrada y fuente de energía.",
@@ -246,6 +246,7 @@ const es: Dict = {
     nav: "Navegación", services: "Servicios", contact: "Contacto", book: "Reservar", mobile: "Servicio a domicilio",
     rights: "Todos los derechos reservados.", tagline: "Mobile Car Detailing · Servicio a Domicilio",
   },
+  hours: { title: "Horario de Atención", days: "Lunes a Sábado", winter: "Otoño e invierno", summer: "Primavera y verano", sunday: "Domingo", closed: "Cerrado" },
   dateLocale: "es-US",
 };
 

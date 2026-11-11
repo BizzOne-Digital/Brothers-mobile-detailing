@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import Field from "./Field";
 import Icon from "./Icon";
-import { ADDON_EXCLUDED, LEATHER_ADDON, SERVICE_DATA, SITE, TIMES, VEHICLE_ICONS, VETERAN_DISCOUNT, veteranPrice } from "@/lib/site";
+import { ADDON_EXCLUDED, LEATHER_ADDON, SERVICE_DATA, SITE, hoursLabel, timeSlots, VEHICLE_ICONS, VETERAN_DISCOUNT, veteranPrice } from "@/lib/site";
 import type { Dict } from "@/lib/i18n/en";
 import { href, type Locale } from "@/lib/i18n/config";
 import { validate, validateAll, type Rule } from "@/lib/validation";
@@ -47,9 +47,9 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
     if (step === 1) return !!d.service;
     if (step === 2) return !!d.vehicle;
     if (step === 3) {
-      const dateErr = validate(d.date, ["required", "future"]);
+      const dateErr = validate(d.date, ["required", "future", "workday"]);
       setErrors((e) => ({ ...e, date: dateErr }));
-      return !dateErr && !!d.time;
+      return !dateErr && timeSlots(d.date).includes(d.time);
     }
     if (step === 4) {
       const errs = validateAll<DetailKey>(d, DETAILS);
@@ -155,18 +155,20 @@ export default function BookingWizard({ t, lang }: { t: Dict; lang: Locale }) {
           <p>{b.s3.text}</p>
           <div style={{ maxWidth: 320, margin: "20px 0" }}>
             <Field id="b-date" label={b.s3.date} required error={errText("date")}>
-              <input id="b-date" type="date" className="input" min={minDate} value={d.date} onChange={(e) => set("date", e.target.value)} />
+              <input id="b-date" type="date" className="input" min={minDate} value={d.date} onChange={(e) => { const v = e.target.value; set("date", v); setErrors((er) => ({ ...er, date: validate(v, ["future", "workday"]) })); if (!timeSlots(v).includes(d.time)) set("time", ""); }} />
             </Field>
           </div>
           <span style={{ fontWeight: 600, fontSize: ".92rem" }}>{b.s3.time} <span className="text-red">*</span></span>
           <div className="times options" style={{ marginTop: 8 }}>
-            {TIMES.map((tm, i) => (
+            {timeSlots(d.date).map((tm, i) => (
               <div className="option" key={tm}>
                 <input type="radio" name="time" id={`t${i}`} checked={d.time === tm} onChange={() => set("time", tm)} />
                 <label htmlFor={`t${i}`}>{tm}</label>
               </div>
             ))}
           </div>
+          {!d.date && <p className="muted" style={{ marginTop: 0 }}>{b.s3.pickDate}</p>}
+          <p className="self-note"><Icon name="clock" /> {t.hours.days}: {t.hours.winter.toLowerCase()} {hoursLabel("winter")} · {t.hours.summer.toLowerCase()} {hoursLabel("summer")}</p>
           {renderStepError(b.s3.err)}
         </div>
       )}

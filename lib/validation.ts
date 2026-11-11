@@ -1,7 +1,7 @@
 /* Shared form validation rules (contact form + booking wizard).
    Rules return the failing rule name; the form shows the translated
    message from dict.form.errors[rule]. */
-export type Rule = "required" | "name" | "email" | "phone" | "future";
+export type Rule = "required" | "name" | "email" | "phone" | "future" | "workday";
 
 const RULES: Record<Rule, (v: string) => boolean> = {
   required: (v) => v.trim() !== "",
@@ -9,6 +9,7 @@ const RULES: Record<Rule, (v: string) => boolean> = {
   email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
   phone: (v) => v.replace(/\D/g, "").length >= 10,
   future: (v) => !v || new Date(v + "T23:59") >= new Date(),
+  workday: (v) => !v || new Date(v + "T12:00").getDay() !== 0, // closed on Sundays
 };
 
 /** Returns the first failing rule, or "" when valid. Optional fields skip checks when empty. */

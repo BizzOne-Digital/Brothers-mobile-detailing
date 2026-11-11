@@ -4,7 +4,7 @@ import Icon, { type IconName } from "@/components/Icon";
 import BeforeAfter from "@/components/BeforeAfter";
 import Gallery from "@/components/Gallery";
 import { Brush, PriceNote, SectionHead } from "@/components/ui";
-import { CtaBanner, FeatureGrid, OfferBlock, PricingCards, ProcessSteps, SelfSufficient, ServiceCard, Stats, Testimonials } from "@/components/sections";
+import { BusinessHours, CtaBanner, FeatureGrid, OfferBlock, PricingCards, ProcessSteps, SelfSufficient, ServiceCard, Stats, Testimonials } from "@/components/sections";
 import { SITE } from "@/lib/site";
 import { photo } from "@/lib/photo";
 import { getDict, localizedServices } from "@/lib/i18n";
@@ -181,6 +181,7 @@ export default async function HomePage() {
               <li><a href={SITE.phone2Href}><span className="ic"><Icon name="phone" /></span><span><small>{t.contactPage.info.phone2}</small><strong>{SITE.phone2}</strong></span></a></li>
               <li><a href={`mailto:${SITE.email}`}><span className="ic"><Icon name="mail" /></span><span><small>{t.contactPage.info.email}</small><strong>{SITE.email}</strong></span></a></li>
             </ul>
+            <BusinessHours />
           </div>
           <div className="form-card reveal reveal-d1">
             <h2 className="heading-md">{h.contact.readyTitle}</h2>

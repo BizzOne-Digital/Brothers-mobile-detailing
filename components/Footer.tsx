@@ -3,6 +3,7 @@ import Icon from "./Icon";
 import { Logo, Socials } from "./ui";
 import { NAV, SERVICE_DATA, SITE } from "@/lib/site";
 import { getDict } from "@/lib/i18n";
+import { BusinessHours } from "./sections";
 import { href } from "@/lib/i18n/config";
 
 export default async function Footer() {
@@ -37,6 +38,7 @@ export default async function Footer() {
               <li><span><Icon name="pin" /> {t.footer.mobile}</span></li>
               <li><span><Icon name="droplet" /> {t.selfSufficient.short}</span></li>
             </ul>
+            <BusinessHours />
             <Link href={href(lang, "/book")} className="btn btn--primary btn--sm" style={{ marginTop: 22 }}><Icon name="calendar" /> {t.nav.book}</Link>
           </div>
         </div>
